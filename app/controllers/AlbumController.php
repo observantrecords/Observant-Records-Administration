@@ -217,5 +217,30 @@ class AlbumController extends \BaseController {
 		}
 	}
 
+	public function save_order() {
+		$albums = Input::get('albums');
+
+		$is_success = true;
+		if (count($albums) > 0) {
+			foreach ($albums as $album) {
+				if (false === $this->_update_album($album['album_id'], $album)) {
+					$is_success = false;
+					$error = 'Album order was not saved.';
+					break;
+				}
+			}
+		}
+
+		echo ($is_success == true) ? 'Album order has been saved.' : $error;
+	}
+
+	private function _update_album($album_id, $input) {
+		$album = Album::find($album_id);
+
+		$album->album_order = $input['album_order'];
+
+		return $album->save();
+	}
+
 
 }

@@ -57,13 +57,15 @@
 </p>
 
 @if (count($recording->audio) > 0)
-<ol class="track-list">
+<ol class="disc-list">
 	@foreach ($recording->audio as $audio)
 	<li>
 		<div>
-			<a href="{{ route( 'audio.edit', array('id' => $audio->audio_id) ) }}" title="[Edit audio]"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'audio.delete', array('id' => $audio->audio_id) ) }}" title="[Remove audio]"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'audio.show', array('id' => $audio->audio_id) ) }}" title="[{{ $audio->audio_file_server }}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}]">{{ $audio->audio_file_name }}</a>
+			<ul class="list-inline">
+				<li><a href="{{ route( 'audio.edit', array('id' => $audio->audio_id) ) }}" title="[Edit audio]"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li><a href="{{ route( 'audio.delete', array('id' => $audio->audio_id) ) }}" title="[Remove audio]"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li><a href="{{ route( 'audio.show', array('id' => $audio->audio_id) ) }}" title="[{{ $audio->audio_file_server }}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}]">{{ $audio->audio_file_name }}</a></li>
+			</ul>
 		</div>
 	</li>
 	@endforeach

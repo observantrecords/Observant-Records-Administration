@@ -24,9 +24,11 @@
 	@foreach ($artists as $artist)
 	<li>
 		<div>
-			<a href="{{ route('artist.edit', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route('artist.delete', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route('artist.show', array('id' => $artist->artist_id) ) }}" title="[View {{ $artist->artist_display_name }}]">{{ $artist->artist_display_name }}</a>
+			<ul class="list-inline">
+				<li><a href="{{ route('artist.edit', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-pencil"></span> <span class="sr-only">Edit</span></a></li>
+				<li><a href="{{ route('artist.delete', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Delete</span></a></li>
+				<li><a href="{{ route('artist.show', array('id' => $artist->artist_id) ) }}" title="[View {{ $artist->artist_display_name }}]">{{ $artist->artist_display_name }}</a></li>
+			</ul>
 		</div>
 	</li>
 	@endforeach

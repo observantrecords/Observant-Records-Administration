@@ -20,10 +20,10 @@
 
 @section('content')
 
-<p>
-	<a href="{{ route('album.edit', array('id' => $album->album_id)) }}" class="button">Edit</a>
-	<a href="{{ route('album.delete', array('id' => $album->album_id)) }}" class="button">Delete</a>
-</p>
+<ul class="list-inline">
+	<li><a href="{{ route('album.edit', array('id' => $album->album_id)) }}" class="button">Edit</a></li>
+	<li><a href="{{ route('album.delete', array('id' => $album->album_id)) }}" class="button">Delete</a></li>
+</ul>
 
 <ul class="two-column-bubble-list">
 	<li>
@@ -79,9 +79,9 @@
 
 <h3>Releases</h3>
 
-<p>
-	<a href="{{ route('release.create', array( 'album' => $album->album_id )) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add a release</a>
-</p>
+<ul class="list-inline">
+	<li><a href="{{ route('release.create', array( 'album' => $album->album_id )) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add a release</a></li>
+</ul>
 
 @if (count($album->releases) > 0)
 <table class="table">
@@ -99,8 +99,10 @@
 	<tr>
 		<td>
 			<div>
-				<a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-pencil" title="[Edit]"></span></a>
-				<a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-remove" title="[Delete]"></span></a>
+				<ul class="list-inline">
+					<li><a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-pencil" title="[Edit]"></span> <span class="sr-only">Edit</span></a></li>
+					<li><a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-remove" title="[Delete]"></span> <span class="sr-only">Delete</span></a></li>
+				</ul>
 			</div>
 		</td>
 		<td>

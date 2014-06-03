@@ -28,10 +28,10 @@
 
 @section('content')
 
-<p>
-	<a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}" class="button">Edit</a>
-	<a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}" class="button">Delete</a>
-</p>
+<ul class="list-inline">
+	<li><a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}" class="button">Edit</a></li>
+	<li><a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}" class="button">Delete</a></li>
+</ul>
 
 <ul class="two-column-bubble-list">
 	<li>
@@ -98,13 +98,18 @@
 <h3>Tracks</h3>
 
 {{ Form::open( array( 'route' => array( 'track.save-order' ), 'id' => 'save-order-form' ) ) }}
-<p>
-	<a href="{{ route( 'track.create', array('release' => $release->release_id) ) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add a track</a>
+<ul class="list-inline">
+	<li><a href="{{ route( 'track.create', array('release' => $release->release_id) ) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add a track</a></li>
 	@if (count($release->release_track_list) > 0)
-	<a href="{{ route( 'release.export-id3' , array('id' => $release->release_id)  ) }}" class="button">Export ID3 data</a>
-	{{ Form::button( 'Save track order', array('id' => 'save-order', 'class' => 'button') ) }}
+	<li><a href="{{ route( 'release.export-id3' , array('id' => $release->release_id)  ) }}" class="button">Export ID3 data</a></li>
+	<li>
+		{{ Form::button( 'Save track order', array('id' => 'save-order', 'class' => 'button') ) }}
+		{{ Form::hidden( 'track_id' ) }}
+	</li>
 	@endif
-	{{ Form::hidden( 'track_id' ) }}
+</ul>
+<p>
+
 </p>
 {{ Form::close() }}
 
@@ -116,11 +121,15 @@
 			@foreach ($tracks as $track)
 			<li>
 				<div>
-					<a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a>
-					<a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a>
-					<span class="track-num-display">{{ $track->track_track_num }}</span>. <a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}">{{ $track->song->song_title }}</a>
-					<input type="hidden" name="track_id" value="{{ $track->track_id }}" />
-					<input type="hidden" name="track_disc_num" value="{{ $track->track_disc_num }}" />
+					<ul class="list-inline">
+						<li><a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a></li>
+						<li><a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a></li>
+						<li>
+							<span class="track-num-display">{{ $track->track_track_num }}</span>. <a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}">{{ $track->song->song_title }}</a>
+							<input type="hidden" name="track_id" value="{{ $track->track_id }}" />
+							<input type="hidden" name="track_disc_num" value="{{ $track->track_disc_num }}" />
+						</li>
+					</ul>
 				</div>
 			</li>
 			@endforeach
@@ -206,12 +215,12 @@
 <h4>Ecommerce links</h4>
 
 {{ Form::open( array( 'route' => array( 'ecommerce.save-order' ), 'id' => 'save-ecommerce-form' ) ) }}
-<p>
-	<a href="{{ route( 'ecommerce.create', array('release' => $release->release_id) ) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add an ecommerce link</a>
+<ul class="list-inline">
+	<li><a href="{{ route( 'ecommerce.create', array('release' => $release->release_id) ) }}" class="button"><span class="glyphicon glyphicon-plus"></span> Add an ecommerce link</a></li>
 	@if (count($release->ecommerce) > 0)
-	{{ Form::button( 'Save ecommerce link order', array('id' => 'save-ecommerce-order', 'class' => 'button') ) }}
+	<li>{{ Form::button( 'Save ecommerce link order', array('id' => 'save-ecommerce-order', 'class' => 'button') ) }}</li>
 	@endif
-</p>
+</ul>
 {{ Form::close() }}
 
 @if (count($release->ecommerce) > 0)
@@ -219,10 +228,14 @@
 	@foreach ($release->ecommerce as $ecommerce)
 	<li>
 		<div>
-			<a href="{{ route( 'ecommerce.edit', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'ecommerce.delete', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', array('id' => $ecommerce->ecommerce_id) ) }}">{{ $ecommerce->ecommerce_label }}</a>
-			<input type="hidden" name="ecommerce_id" value="{{ $ecommerce->ecommerce_id }}" />
+			<ul class="list-inline">
+				<li><a href="{{ route( 'ecommerce.edit', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li><a href="{{ route( 'ecommerce.delete', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li>
+					<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', array('id' => $ecommerce->ecommerce_id) ) }}">{{ $ecommerce->ecommerce_label }}</a>
+					<input type="hidden" name="ecommerce_id" value="{{ $ecommerce->ecommerce_id }}" />
+				</li>
+			</ul>
 		</div>
 	</li>
 	@endforeach

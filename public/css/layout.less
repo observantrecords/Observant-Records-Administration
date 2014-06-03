@@ -149,20 +149,27 @@ ul.column-list {
 	border-radius: 4px;
 }
 
+.bubble {
+	border: 1px solid @light-grey;
+	border-radius: 4px;
+	padding: 3px 10px;
+	margin-bottom: 1em;
+}
+
+/* This rule is no longer named accurately */
 ul.two-column-bubble-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	li {
-		display: inline-block;
-		width: 270px;
-		.disc-track-item;
-		div {
-			margin: 3px 0 0 10px;
-			label {
-				font-weight: bold;
-				width: 110px;
-			}
+}
+
+ul.two-column-bubble-list>li {
+	.disc-track-item;
+	div {
+		margin: 3px 10px;
+		label {
+			font-weight: bold;
+			width: 110px;
 		}
 	}
 }
@@ -171,13 +178,16 @@ ol.disc-list {
 	list-style: none;
 	margin: 1.5em 0;
 	padding: 0;
-	li {
-		display: block;
-		width: 550px;
-		.disc-track-item;
-		h4 {
-			margin: 10px;
-		}
+}
+
+ol.disc-list>li {
+	display: block;
+	.disc-track-item;
+	h4 {
+		margin: 10px;
+	}
+	div {
+		margin: 3px 0 0 10px;
 	}
 }
 
@@ -185,28 +195,28 @@ ol.track-list {
 	list-style: decimal;
 	margin: 0;
 	padding: 0;
-	li {
-		display: block;
-		width: 470px;
-		margin-left: 40px;
-		margin-right: 40px;
-		.disc-track-item;
-		div {
-			margin: 3px 0 0 10px;
-		}
+}
+
+ol.track-list>li {
+	display: block;
+	margin-left: 10px;
+	margin-right: 10px;
+	.disc-track-item;
+	div {
+		margin: 3px 10px;
 	}
 }
 
 ul.ecommerce-list {
 	margin: 0;
 	padding: 0;
-	li {
-		display: block;
-		width: 550px;
-		.disc-track-item;
-		div {
-			margin: 3px 0 0 10px;
-		}
+}
+
+ul.ecommerce-list>li {
+	display: block;
+	.disc-track-item;
+	div {
+		margin: 3px 10px;
 	}
 }
 
@@ -232,4 +242,10 @@ ul.ecommerce-list {
 
 .cover {
 	background-color: #EFEFEF;
+}
+
+@media screen and (max-width: 992px) {
+	#observant-records-logo {
+		width: 100%;
+	}
 }

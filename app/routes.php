@@ -22,6 +22,7 @@ Route::get( '/artist/{artist}/delete', array( 'as' => 'artist.delete', 'before' 
 Route::model('album', 'Album');
 Route::resource('album', 'AlbumController');
 Route::get( '/album/{album}/delete', array( 'as' => 'album.delete', 'before' => 'auth', 'uses' => 'AlbumController@delete' ) );
+Route::post( '/album/save-order', array( 'as' => 'album.save-order', 'before' => 'auth|csrf', 'uses' => 'AlbumController@save_order' ) );
 
 // Release
 Route::model('release', 'Release');
