@@ -1,0 +1,273 @@
+/*
+    Document   : layout
+    Created on : Sep 10, 2011, 12:15:55 AM
+    Author     : Greg Bueno
+    Description:
+        Uses the Minimalist Design and Sleepy Hollow color schemes from the
+    Color Schemer Gallery.
+*/
+
+@dark-red-brown: #402C29;
+@medium-grey: #F2F2F2;
+@light-grey: #CBCBCB;
+
+#container {
+	display: block;
+	width: 950px;
+	margin: 0 auto;
+}
+
+#masthead {
+	margin-top: 1.5em;
+	ul {
+		list-style-type: none;
+	}
+	#logo {
+		float: left;
+		width: 630px;
+		margin-right: 0px;
+		padding-left: 160px;
+		padding-right: 160px;
+	}
+}
+
+#nav-column-1 {
+	float: left;
+	width: 350px;
+	margin-right: 10px;
+	padding-left: 160px;
+	text-align: center;
+}
+
+#nav-column-2 {
+	float: left;
+	width: 270px;
+	margin-right: 0px;
+	padding-right: 160px;
+	text-align: center;
+}
+
+.navigation-list-item {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+#nav-main li {
+	.navigation-list-item;
+	margin-left: 24px;
+}
+#nav-social li {
+	.navigation-list-item;
+	margin-left: 6px;
+}
+
+.container-blueprint {
+	float: left;
+	width: 950px;
+	margin-right: 0px;
+}
+
+#content {
+	.container-blueprint;
+	#column-1 {
+		float: left;
+		width: 590px;
+		margin-right: 10px;
+		padding-right: 40px;
+	}
+	#column-2 {
+		float: left;
+		width: 310px;
+		margin-right: 0px;
+	}
+	#admin-column-1 {
+		float: left;
+		width: 670px;
+		margin-right: 10px;
+		padding-right: 40px;
+	}
+	#admin-column-2 {
+		float: left;
+		width: 230px;
+		margin-right: 0px;
+	}
+}
+
+#album_player {
+	margin: 0 0 1em;
+}
+
+footer {
+	.container-blueprint;
+}
+
+label
+{
+	float: left;
+	font-weight: bold;
+	width: 150px;
+	margin-right: 10px;
+}
+
+label.error, span.error
+{
+	color: #F99;
+	display: none;
+}
+
+input[type=text], input[type=password], input[type=email], select, textarea
+{
+	border: 1px solid @dark-red-brown;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: @medium-grey;
+}
+
+table.track-table
+{
+	border: 1px dotted @dark-red-brown;
+	border-collapse: collapse;
+	thead {
+		th
+		{
+			border: 1px dotted #999;
+			font-size: 7pt;
+			color: #FFF;
+			background-color: #333;
+		}
+	}
+	tbody {
+		tr:nth-child(2n) {
+			td {
+			    background-color: @light-grey;
+			}
+		}
+		td.track-column
+		{
+			width: 50px;
+		}
+		td.play-column
+		{
+			width: 20px;
+		}
+	}
+}
+
+ul.album-list {
+	list-style: none;
+	margin: 0 0 1.5em 0;
+	padding: 0;
+	li {
+		display: inline;
+	}
+}
+
+ul.column-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	li {
+		display: inline-block;
+		margin-right: 10px;
+		height: 3em;
+		min-width: 230px;
+		width: 270px;
+		vertical-align: top;
+	}
+}
+
+.disc-track-item {
+	margin-right: 10px;
+	margin-bottom: 1em;
+	min-height: 2em;
+	min-width: 230px;
+	vertical-align: top;
+	border: 1px solid @light-grey;
+	border-radius: 4px;
+}
+
+ul.two-column-bubble-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	li {
+		display: inline-block;
+		width: 270px;
+		.disc-track-item;
+		div {
+			margin: 3px 0 0 10px;
+			label {
+				font-weight: bold;
+				width: 110px;
+			}
+		}
+	}
+}
+
+ol.disc-list {
+	list-style: none;
+	margin: 1.5em 0;
+	padding: 0;
+	li {
+		display: block;
+		width: 550px;
+		.disc-track-item;
+		h4 {
+			margin: 10px;
+		}
+	}
+}
+
+ol.track-list {
+	list-style: decimal;
+	margin: 0;
+	padding: 0;
+	li {
+		display: block;
+		width: 470px;
+		margin-left: 40px;
+		margin-right: 40px;
+		.disc-track-item;
+		div {
+			margin: 3px 0 0 10px;
+		}
+	}
+}
+
+ul.ecommerce-list {
+	margin: 0;
+	padding: 0;
+	li {
+		display: block;
+		width: 550px;
+		.disc-track-item;
+		div {
+			margin: 3px 0 0 10px;
+		}
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+.plain-list {
+	list-style: none;
+}
+
+.centered {
+	text-align: center;
+}
+
+.button {
+	padding: 4px 10px 4px;
+	border-radius: 4px;
+	border: 1px solid #000;
+	background-color: #304B75;
+	cursor: pointer;
+}
+
+.cover {
+	background-color: #EFEFEF;
+}

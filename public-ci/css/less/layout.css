@@ -1,0 +1,267 @@
+/*
+    Document   : layout
+    Created on : Sep 10, 2011, 12:15:55 AM
+    Author     : Greg Bueno
+    Description:
+        Uses the Minimalist Design and Sleepy Hollow color schemes from the
+    Color Schemer Gallery.
+*/
+#container {
+  display: block;
+  width: 950px;
+  margin: 0 auto;
+}
+#masthead {
+  margin-top: 1.5em;
+}
+#masthead ul {
+  list-style-type: none;
+}
+#masthead #logo {
+  float: left;
+  width: 630px;
+  margin-right: 0px;
+  padding-left: 160px;
+  padding-right: 160px;
+}
+#nav-column-1 {
+  float: left;
+  width: 350px;
+  margin-right: 10px;
+  padding-left: 160px;
+  text-align: center;
+}
+#nav-column-2 {
+  float: left;
+  width: 270px;
+  margin-right: 0px;
+  padding-right: 160px;
+  text-align: center;
+}
+.navigation-list-item {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+#nav-main li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-left: 24px;
+}
+#nav-social li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-left: 6px;
+}
+.container-blueprint {
+  float: left;
+  width: 950px;
+  margin-right: 0px;
+}
+#content {
+  float: left;
+  width: 950px;
+  margin-right: 0px;
+}
+#content #column-1 {
+  float: left;
+  width: 590px;
+  margin-right: 10px;
+  padding-right: 40px;
+}
+#content #column-2 {
+  float: left;
+  width: 310px;
+  margin-right: 0px;
+}
+#content #admin-column-1 {
+  float: left;
+  width: 670px;
+  margin-right: 10px;
+  padding-right: 40px;
+}
+#content #admin-column-2 {
+  float: left;
+  width: 230px;
+  margin-right: 0px;
+}
+#album_player {
+  margin: 0 0 1em;
+}
+footer {
+  float: left;
+  width: 950px;
+  margin-right: 0px;
+}
+label {
+  float: left;
+  font-weight: bold;
+  width: 150px;
+  margin-right: 10px;
+}
+label.error,
+span.error {
+  color: #F99;
+  display: none;
+}
+input[type=text],
+input[type=password],
+input[type=email],
+select,
+textarea {
+  border: 1px solid #402c29;
+  border-radius: 3px;
+  padding: 4px;
+  background-color: #f2f2f2;
+}
+table.track-table {
+  border: 1px dotted #402c29;
+  border-collapse: collapse;
+}
+table.track-table thead th {
+  border: 1px dotted #999;
+  font-size: 7pt;
+  color: #FFF;
+  background-color: #333;
+}
+table.track-table tbody tr:nth-child(2n) td {
+  background-color: #cbcbcb;
+}
+table.track-table tbody td.track-column {
+  width: 50px;
+}
+table.track-table tbody td.play-column {
+  width: 20px;
+}
+ul.album-list {
+  list-style: none;
+  margin: 0 0 1.5em 0;
+  padding: 0;
+}
+ul.album-list li {
+  display: inline;
+}
+ul.column-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.column-list li {
+  display: inline-block;
+  margin-right: 10px;
+  height: 3em;
+  min-width: 230px;
+  width: 270px;
+  vertical-align: top;
+}
+.disc-track-item {
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
+}
+ul.two-column-bubble-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.two-column-bubble-list li {
+  display: inline-block;
+  width: 270px;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
+}
+ul.two-column-bubble-list li div {
+  margin: 3px 0 0 10px;
+}
+ul.two-column-bubble-list li div label {
+  font-weight: bold;
+  width: 110px;
+}
+ol.disc-list {
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0;
+}
+ol.disc-list li {
+  display: block;
+  width: 550px;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
+}
+ol.disc-list li h4 {
+  margin: 10px;
+}
+ol.track-list {
+  list-style: decimal;
+  margin: 0;
+  padding: 0;
+}
+ol.track-list li {
+  display: block;
+  width: 470px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
+}
+ol.track-list li div {
+  margin: 3px 0 0 10px;
+}
+ul.ecommerce-list {
+  margin: 0;
+  padding: 0;
+}
+ul.ecommerce-list li {
+  display: block;
+  width: 550px;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
+}
+ul.ecommerce-list li div {
+  margin: 3px 0 0 10px;
+}
+.hidden {
+  display: none;
+}
+.plain-list {
+  list-style: none;
+}
+.centered {
+  text-align: center;
+}
+.button {
+  padding: 4px 10px 4px;
+  border-radius: 4px;
+  border: 1px solid #000;
+  background-color: #304B75;
+  cursor: pointer;
+}
+.cover {
+  background-color: #EFEFEF;
+}
