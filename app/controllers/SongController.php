@@ -10,6 +10,10 @@ class SongController extends \BaseController {
 		$this->layout_variables = array(
 			'config_url_base' => $config_url_base,
 		);
+
+		$this->beforeFilter('auth');
+
+		$this->beforeFilter('csrf', array( 'only' => array( 'store', 'update', 'destroy' ) ) );
 	}
 
 	/**

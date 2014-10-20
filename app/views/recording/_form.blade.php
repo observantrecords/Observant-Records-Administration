@@ -22,6 +22,7 @@
 		<div class="col-sm-10">
 			@if (!empty($recording->recording_isrc_num))
 			{{ $recording->recording_isrc_num }}
+			{{ Form::hidden( 'recording_isrc_num', $recording->recording_isrc_num, array( 'id' => 'recording_isrc_num' ) ) }}
 			@else
 			{{ Form::text( '_display_recording_isrc_num', null, array('disabled' => 'disabled', 'id' => '_display_recording_isrc_num') ) }}
 			{{ Form::hidden( 'recording_isrc_num', null, array( 'id' => 'recording_isrc_num' ) ) }}

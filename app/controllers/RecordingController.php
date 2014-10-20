@@ -10,6 +10,10 @@ class RecordingController extends \BaseController {
 		$this->layout_variables = array(
 			'config_url_base' => $config_url_base,
 		);
+
+		$this->beforeFilter('auth');
+
+		$this->beforeFilter('csrf', array( 'only' => array( 'store', 'update', 'destroy' ) ) );
 	}
 
 	/**
@@ -99,6 +103,12 @@ class RecordingController extends \BaseController {
 		$result = $recording->save();
 
 		if ($result !== false) {
+			$recording_isrc_num = Input::get('recording_isrc_num');
+			if (!empty($recording_isrc_num)) {
+				$isrc = RecordingISRC::where('isrc_code', $recording_isrc_num)->first();
+				$isrc->isrc_recording_id = $recording->recording_id;
+				$isrc->save();
+			}
 			return Redirect::route('recording.show', array('id' => $recording->recording_id))->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('recording.index', array('artist' => $recording->recording_artist_id))->with('error', 'Your changes were not saved.');

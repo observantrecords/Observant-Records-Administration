@@ -32,32 +32,32 @@ Route::get( '/release/{release}/export-id3', array( 'as' => 'release.export-id3'
 
 // Tracks
 Route::model('track', 'Track');
-Route::resource('track', 'TrackController');
 Route::get( '/track/{track}/delete', array( 'as' => 'track.delete', 'before' => 'auth', 'uses' => 'TrackController@delete' ) );
 Route::post( '/track/save-order', array( 'as' => 'track.save-order', 'before' => 'auth|csrf', 'uses' => 'TrackController@save_order' ) );
+Route::resource('track', 'TrackController');
 
 // Audio
 Route::model('audio', 'Audio');
-Route::resource('audio', 'AudioController');
 Route::get( '/audio/{audio}/delete/', array( 'as' => 'audio.delete', 'before' => 'auth', 'uses' => 'AudioController@delete' ) );
+Route::resource('audio', 'AudioController');
 
 // Ecommerce
 Route::model('ecommerce', 'Ecommerce');
-Route::resource('ecommerce', 'EcommerceController');
 Route::get( '/ecommerce/{ecommerce}/delete', array( 'as' => 'ecommerce.delete', 'before' => 'auth', 'uses' => 'EcommerceController@delete' ) );
 Route::post( '/ecommerce/save-order', array( 'as' => 'ecommerce.save-order', 'before' => 'auth|csrf', 'uses' => 'EcommerceController@save_order' ) );
+Route::resource('ecommerce', 'EcommerceController');
 
 // Songs
 Route::model('song', 'Song');
-Route::resource('song', 'SongController');
 Route::get( '/song/{song}/delete', array( 'as' => 'song.delete', 'before' => 'auth', 'uses' => 'SongController@delete' ) );
 Route::get( '/song/{song}/lyrics', array( 'as' => 'song.lyrics', 'before' => 'auth', 'uses' => 'SongController@lyrics' ) );
+Route::resource('song', 'SongController');
 
 // Recordings
 Route::model('recording', 'Recording');
-Route::resource('recording', 'RecordingController');
 Route::get( '/recording/{recording}/delete', array( 'as' => 'recording.delete', 'before' => 'auth', 'uses' => 'RecordingController@delete' ) );
 Route::post( '/recording/generate-isrc', array( 'as' => 'recording.isrc', 'before' => 'auth', 'uses' => 'RecordingController@generate_isrc' ) );
+Route::resource('recording', 'RecordingController');
 
 // Authentication
 Route::get( '/login', array( 'as' => 'auth.login', 'uses' => 'AuthController@login') );

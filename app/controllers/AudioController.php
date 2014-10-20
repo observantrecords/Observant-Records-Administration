@@ -10,6 +10,10 @@ class AudioController extends \BaseController {
 		$this->layout_variables = array(
 			'config_url_base' => $config_url_base,
 		);
+
+		$this->beforeFilter('auth');
+
+		$this->beforeFilter('csrf', array( 'only' => array( 'store', 'update', 'destroy' ) ) );
 	}
 
 	/**
@@ -30,17 +34,9 @@ class AudioController extends \BaseController {
 		}
 		$audio_files->load('recording');
 
-		$recordings = Recording::orderBy('recording_isrc_num')->get();
-		$recording_list = $recordings->lists('recording_isrc_num', 'recording_id');
-		foreach ($recording_list as $r => $recording_list_item) {
-			$recording_list[$r] = $recording_list_item . ' ('. $recordings->find($r)->song->song_title . ')';
-		}
-		$recording_list = array(0 => '&nbsp;') + $recording_list;
-
 		$method_variables = array(
 			'audio_files' => $audio_files,
 			'recording' => $recording,
-			'recordings' => $recording_list,
 		);
 
 		$data = array_merge($method_variables, $this->layout_variables);

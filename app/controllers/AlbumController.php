@@ -18,6 +18,10 @@ class AlbumController extends \BaseController {
 			'formats' => $format_list,
 			'locales' => array('en', 'jp'),
 		);
+
+		$this->beforeFilter('auth');
+
+		$this->beforeFilter('csrf', array( 'only' => array( 'store', 'update', 'destroy' ) ) );
 	}
 
 	/**
