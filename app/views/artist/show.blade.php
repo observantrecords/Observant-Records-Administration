@@ -123,7 +123,7 @@
 	});
 	$('#save-order').click(function () {
 		var albums = [], album_order, album_id, album_info;
-		$('.track-list').children().each(function () {
+		$('.disc-list').children().each(function () {
 			album_order = $(this).find('.album-order-display').html();
 			album_id = $(this).find('input[name=album_id]').val();
 			album_info = {
