@@ -246,4 +246,10 @@ class ReleaseController extends \BaseController {
 		echo $file_with_bom;
 		die();
 	}
+
+	public function generate_catalog_num() {
+		$release = new Release;
+		$recording_isrc_code = (object) array('catalog_num' => $release->generate_catalog_num());
+		echo json_encode($recording_isrc_code);
+	}
 }

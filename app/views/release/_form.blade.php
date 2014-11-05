@@ -47,7 +47,8 @@
 <div class="form-group">
 	{{ Form::label( 'release_catalog_num', 'Catalog no.:', array( 'class' => 'col-sm-2 control-label' ) ) }}
 	<div class="col-sm-10">
-		{{ Form::text( 'release_catalog_num', $release->release_catalog_num, array( 'class' => 'form-control' ) ) }}
+		{{ Form::text( 'release_catalog_num', $release->release_catalog_num, array(  ) ) }}
+		{{ Form::button( 'Generate', array('id' => 'generate_catalog_num', 'class' => 'button') ) }}
 	</div>
 </div>
 
@@ -90,6 +91,33 @@
 <script type="text/javascript">
 	(function ($) {
 		$(function () {
+			var Release_Edit = {
+				generate_catalog_num: function () {
+					var _token = $('input[name=_token]').val();
+					var data = {
+						'_token': _token
+					}
+					var url = '/release/generate-catalog-num';
+					$.post(url, data, function (response) {
+						var result = $.parseJSON(response);
+
+						if ( $('#release_catalog_num').val() != '' ) {
+							var overwrite_catalog_num = confirm('Do you want to overwrite the existing catalog number?');
+							if (overwrite_catalog_num === true) {
+								$('#release_catalog_num').val(result.catalog_num);
+							}
+						} else {
+							$('#release_catalog_num').val(result.catalog_num);
+						}
+					}).error(function (xmlreq, status, error_text) {
+						alert(error_text);
+					});
+				}
+			};
+			$('#generate_catalog_num').click(function () {
+				Release_Edit.generate_catalog_num();
+			});
+
 			$('#release_album_id').chosen();
 			$('#release_format_id').chosen();
 

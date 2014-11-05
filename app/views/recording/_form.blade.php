@@ -41,7 +41,7 @@
 <script type="text/javascript">
 	(function ($) {
 		var Recording_Edit = {
-			generate_isrc_code: function () {
+			generate_catalog_num: function () {
 				var _token = $('input[name=_token]').val();
 				var data = {
 					'_token': _token
@@ -58,7 +58,7 @@
 			}
 		};
 		$('#generate_custom_isrc').click(function () {
-			Recording_Edit.generate_isrc_code();
+			Recording_Edit.generate_catalog_num();
 		});
 		$('#recording_artist_id').chosen();
 		$('#recording_song_id').chosen();

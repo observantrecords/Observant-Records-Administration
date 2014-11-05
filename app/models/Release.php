@@ -28,6 +28,7 @@ class Release extends Eloquent {
 		'release_date_modified',
 		'release_deleted',
 	);
+	private $_catalog_stem;
 
 	public function album() {
 		return $this->belongsTo('Album', 'release_album_id', 'album_id');
@@ -45,4 +46,30 @@ class Release extends Eloquent {
 		return $this->hasMany('Ecommerce', 'ecommerce_release_id', 'release_id');
 	}
 
-} 
+	public function generate_catalog_num() {
+		$catalog_num = null;
+
+		// Get the most recently generated code for the year.
+		$result = $this->_retrieve_last_number();
+
+		// If a result exists, increment the designation code.
+		if (!empty($result)) {
+			list ($stem, $suffix) = explode('-', $result->release_catalog_num);
+			$new_suffix = intval( substr($suffix, 0, 3) );
+			$new_suffix++;
+			$catalog_num = $stem . '-' . sprintf('%03d', $new_suffix) . 'B';
+		} else {
+			// If no result exists, create the first code.
+			$catalog_num = $this->_catalog_stem . sprintf('%03d', 1) . 'B';
+		}
+
+		// Return the code.
+		return $catalog_num;
+	}
+
+	private function _retrieve_last_number() {
+		$result = DB::table($this->table)->where('release_catalog_num', 'LIKE', 'OBRC-%B')->orderBy('release_catalog_num', 'desc')->first();
+		return $result;
+	}
+
+}

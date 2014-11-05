@@ -29,6 +29,7 @@ Route::model('release', 'Release');
 Route::resource('release', 'ReleaseController');
 Route::get( '/release/{release}/delete', array( 'as' => 'release.delete', 'before' => 'auth', 'uses' => 'ReleaseController@delete' ) );
 Route::get( '/release/{release}/export-id3', array( 'as' => 'release.export-id3', 'before' => 'auth', 'uses' => 'ReleaseController@export_id3' ) );
+Route::post( '/release/generate-catalog-num', array( 'as' => 'release.catalog-num', 'before' => 'auth', 'uses' => 'ReleaseController@generate_catalog_num' ) );
 
 // Tracks
 Route::model('track', 'Track');
