@@ -66,12 +66,7 @@ class TrackController extends \BaseController {
 			$track->track_disc_num = $last_disc_num;
 
 			$last_track_num = Track::where('track_release_id', '=', $release_id)->max('track_track_num');
-			if (empty($last_track_num)) {
-				$last_track_num = 1;
-			}
-
-			$track->track_track_num = $last_track_num + 1;
-
+			$track->track_track_num = empty($last_track_num) ? 1 : $last_track_num + 1;
 		}
 
 
