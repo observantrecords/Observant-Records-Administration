@@ -258,9 +258,8 @@ class AudioController extends \BaseController {
 			$results = $s3->getIterator('ListObjects', $args);
 
 			foreach ($results as $result) {
-				$dirname = '/' . dirname($result['Key']);
-				if (array_search($dirname, $directories) === false) {
-					$directories[] = $dirname;
+				if (array_search($result['Key'], $directories) === false) {
+					$directories[] = dirname($result['Key']);
 				}
 			}
 			return $directories;
