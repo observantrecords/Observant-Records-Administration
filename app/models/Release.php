@@ -35,7 +35,7 @@ class Release extends Eloquent {
 	}
 
 	public function tracks() {
-		return $this->hasMany('Track', 'track_release_id', 'release_id');
+		return $this->hasMany('Track', 'track_release_id', 'release_id')->orderBy('track_disc_num')->orderBy('track_track_num');
 	}
 
 	public function format() {
