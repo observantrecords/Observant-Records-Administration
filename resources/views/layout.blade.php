@@ -11,9 +11,8 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
-    <link rel="stylesheet" href="/css/typography.css" type="text/css" media="screen, projection" />
-	<link rel="stylesheet" href="/css/layout.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+	<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" />
 	<link rel="stylesheet" href="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/web/css/chosen.min.css" type="text/css" />
 	<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>

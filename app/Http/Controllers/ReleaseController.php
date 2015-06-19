@@ -15,9 +15,7 @@ class ReleaseController extends Controller {
 	private $layout_variables = array();
 
 	public function __construct() {
-		$this->layout_variables = array(
-			'config_url_base' => config('global.url_base'),
-		);
+
 	}
 
 	/**
