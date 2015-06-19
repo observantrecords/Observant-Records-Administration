@@ -5,6 +5,9 @@
     Description:
         Purpose of the stylesheet follows.
 */
+body {
+  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+}
 #nav-main {
   font-size: 120%;
 }
@@ -20,7 +23,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Open Sans, Helvetica', 'Arial', sans-serif;
 }
 #title {
   font-family: 'Lucida Sans Unicode', sans-serif;
