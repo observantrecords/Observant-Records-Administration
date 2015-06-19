@@ -8,12 +8,12 @@ module.exports = function(grunt) {
 					cleancss: true
 				},
 				files: {
-					'css/style.css': 'less/style.less'
+					'../../public/css/style.css': 'less/style.less'
 				}
 			},
 			development: {
 				files: {
-					'css/style.dev.css': 'less/style.less'
+					'../../public/css/style.dev.css': 'less/style.less'
 				}
 			}
 		}
