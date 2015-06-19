@@ -13,3 +13,16 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+SetEnvIf HOST dev.admin.observantrecords.com dev
+SetEnvIf HOST test.admin.observantrecords.com test
+AuthType Basic
+AuthUserFile /home/grebue5/.htpasswd
+AuthName "Observant Records development site"
+require valid-user
+
+Order allow,deny
+Allow from all
+Deny from env=dev
+Deny from env=test
+Satisfy any
