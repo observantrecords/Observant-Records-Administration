@@ -21,7 +21,6 @@ class AlbumController extends Controller {
 		}
 
 		$this->layout_variables = array(
-			'config_url_base' => config('global.url_base'),
 			'formats' => $format_list,
 			'locales' => array('en', 'jp'),
 		);
