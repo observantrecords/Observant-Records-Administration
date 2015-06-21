@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ObservantRecords\App\Admin\Http\Controllers;
 
-use App\Models\Artist;
-use App\Models\Album;
-use App\Models\AlbumFormat;
+use ObservantRecords\App\Admin\Models\Artist;
+use ObservantRecords\App\Admin\Models\Album;
+use ObservantRecords\App\Admin\Models\AlbumFormat;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;

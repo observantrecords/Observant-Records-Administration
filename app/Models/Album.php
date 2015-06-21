@@ -6,7 +6,7 @@
  * Time: 5:26 PM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,19 +32,19 @@ class Album extends Model {
 	);
 
 	public function artist() {
-		return $this->belongsTo('App\Models\Artist', 'album_artist_id', 'artist_id');
+		return $this->belongsTo('ObservantRecords\App\Admin\Models\Artist', 'album_artist_id', 'artist_id');
 	}
 
 	public function releases() {
-		return $this->hasMany('App\Models\Release', 'release_album_id', 'album_id');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Release', 'release_album_id', 'album_id');
 	}
 
 	public function primary_release() {
-		return $this->hasOne('App\Models\Release', 'release_id', 'album_primary_release_id');
+		return $this->hasOne('ObservantRecords\App\Admin\Models\Release', 'release_id', 'album_primary_release_id');
 	}
 
 	public function format() {
-		return $this->hasOne('App\Models\AlbumFormat', 'format_id', 'album_format_id');
+		return $this->hasOne('ObservantRecords\App\Admin\Models\AlbumFormat', 'format_id', 'album_format_id');
 	}
 
 	public function scopeEponymous4($query) {

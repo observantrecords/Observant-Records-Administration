@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace ObservantRecords\App\Admin\Events;
 
 abstract class Event
 {

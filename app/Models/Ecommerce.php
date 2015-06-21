@@ -6,7 +6,7 @@
  * Time: 2:59 PM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,10 +28,10 @@ class Ecommerce extends Model {
 	);
 
 	public function track() {
-		return $this->belongsTo( 'App\Models\Track', 'ecommerce_track_id', 'track_id' );
+		return $this->belongsTo( 'ObservantRecords\App\Admin\Models\Track', 'ecommerce_track_id', 'track_id' );
 	}
 
 	public function release() {
-		return $this->belongsTo( 'App\Models\Release', 'ecommerce_release_id', 'release_id' );
+		return $this->belongsTo( 'ObservantRecords\App\Admin\Models\Release', 'ecommerce_release_id', 'release_id' );
 	}
 }
