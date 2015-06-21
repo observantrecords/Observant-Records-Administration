@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ObservantRecords\App\Admin\Http\Controllers;
 
-use App\Models\Recording;
-use App\Models\Audio;
+use ObservantRecords\App\Admin\Models\Recording;
+use ObservantRecords\App\Admin\Models\Audio;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;

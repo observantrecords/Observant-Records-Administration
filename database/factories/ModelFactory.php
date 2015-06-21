@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+$factory->define(ObservantRecords\App\Admin\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,

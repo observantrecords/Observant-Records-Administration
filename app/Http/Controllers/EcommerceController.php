@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ObservantRecords\App\Admin\Http\Controllers;
 
-use App\Models\Release;
-use App\Models\Track;
-use App\Models\Ecommerce;
+use ObservantRecords\App\Admin\Models\Release;
+use ObservantRecords\App\Admin\Models\Track;
+use ObservantRecords\App\Admin\Models\Ecommerce;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
