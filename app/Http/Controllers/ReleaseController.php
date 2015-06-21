@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ObservantRecords\App\Admin\Http\Controllers;
 
-use App\Models\Album;
-use App\Models\Release;
-use App\Models\ReleaseFormat;
-use App\Models\Track;
+use ObservantRecords\App\Admin\Models\Album;
+use ObservantRecords\App\Admin\Models\Release;
+use ObservantRecords\App\Admin\Models\ReleaseFormat;
+use ObservantRecords\App\Admin\Models\Track;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;

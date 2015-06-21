@@ -6,7 +6,7 @@
  * Time: 4:00 PM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,15 +33,15 @@ class Artist extends Model {
 	}
 
 	public function albums() {
-		return $this->hasMany('App\Models\Album', 'album_artist_id', 'artist_id')->orderBy('album_order');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Album', 'album_artist_id', 'artist_id')->orderBy('album_order');
 	}
 
 	public function songs() {
-		return $this->hasMany('App\Models\Song', 'song_primary_artist_id', 'artist_id')->orderBy('song_title');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Song', 'song_primary_artist_id', 'artist_id')->orderBy('song_title');
 	}
 
 	public function recordings() {
-		return $this->hasMany('App\Models\Recording', 'recording_artist_id', 'artist_id');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Recording', 'recording_artist_id', 'artist_id');
 	}
 
 	public function scopeEponymous4($query) {

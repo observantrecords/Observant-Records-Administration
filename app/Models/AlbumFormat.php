@@ -6,7 +6,7 @@
  * Time: 5:29 PM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +17,7 @@ class AlbumFormat extends Model {
 	protected $softDelete = true;
 
 	public function albums() {
-		return $this->hasMany('App\Models\Album', 'album_format_id', 'format_id');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Album', 'album_format_id', 'format_id');
 	}
 
 }

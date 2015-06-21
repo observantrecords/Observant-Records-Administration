@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace ObservantRecords\App\Admin\Jobs;
 
 use Illuminate\Bus\Queueable;
 

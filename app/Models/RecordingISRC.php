@@ -6,7 +6,7 @@
  * Time: 8:55 AM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,7 +36,7 @@ class RecordingISRC extends Model {
 	}
 
 	public function isrc() {
-		return $this->hasOne('App\Models\Recording', 'isrc_recording_id', 'recording_id');
+		return $this->hasOne('ObservantRecords\App\Admin\Models\Recording', 'isrc_recording_id', 'recording_id');
 	}
 
 	public function generate_code() {
