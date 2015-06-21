@@ -24,7 +24,7 @@
             "database"
         ],
         "psr-4": {
-            "ObservantRecords\App\Admin\\": "app/"
+            "ObservantRecords\\App\\Admin\\": "app/"
         }
     },
     "autoload-dev": {
