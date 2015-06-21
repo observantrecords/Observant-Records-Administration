@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: ObservantRecords\App\Admin
+        psr4_prefix: ObservantRecords\App\Admin
         src_path: app

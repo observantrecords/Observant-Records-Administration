@@ -140,9 +140,9 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        ObservantRecords\App\Admin\Providers\AppServiceProvider::class,
+        ObservantRecords\App\Admin\Providers\EventServiceProvider::class,
+        ObservantRecords\App\Admin\Providers\RouteServiceProvider::class,
 
 		Collective\Html\HtmlServiceProvider::class,
 

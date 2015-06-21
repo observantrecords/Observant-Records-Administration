@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

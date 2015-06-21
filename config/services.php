@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => App\User::class,
+        'model'  => ObservantRecords\App\Admin\User::class,
         'key' => '',
         'secret' => '',
     ],

@@ -6,7 +6,7 @@
  * Time: 5:58 PM
  */
 
-namespace App\Models;
+namespace ObservantRecords\App\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,15 +35,15 @@ class Song extends Model {
 
 
 	public function artist() {
-		return $this->belongsTo('App\Models\Artist', 'song_primary_artist_id', 'artist_id');
+		return $this->belongsTo('ObservantRecords\App\Admin\Models\Artist', 'song_primary_artist_id', 'artist_id');
 	}
 
 	public function recordings() {
-		return $this->hasMany('App\Models\Recording', 'recording_song_id', 'song_id');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Recording', 'recording_song_id', 'song_id');
 	}
 
 	public function tracks() {
-		return $this->hasMany('App\Models\Track', 'track_song_id', 'song_id');
+		return $this->hasMany('ObservantRecords\App\Admin\Models\Track', 'track_song_id', 'song_id');
 	}
 
 } 
