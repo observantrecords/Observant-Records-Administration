@@ -1,0 +1,232 @@
+/* 
+    Document   : typography
+    Created on : Nov 11, 2011, 7:56:20 AM
+    Author     : Greg Bueno
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif; }
+
+#nav-main {
+  font-size: 120%; }
+
+a {
+  color: #304B75; }
+
+a:hover {
+  color: #402C29; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif; }
+
+#title {
+  font-family: 'Lucida Sans Unicode', sans-serif; }
+  #title a {
+    text-decoration: none;
+    color: #000; }
+
+input[type=text], input[type=password], input[type=email], select, textarea {
+  font-size: 100%;
+  font-family: inherit; }
+
+.form_hidden {
+  display: none; }
+
+.smaller {
+  font-size: smaller; }
+
+table.track-table {
+  font-family: 'Helvetica', 'Arial', sans-serif; }
+
+.button {
+  text-decoration: none;
+  color: #FFF; }
+
+.button:hover {
+  color: #FFF; }
+
+.caution {
+  font-weight: bold;
+  color: #900; }
+
+/*
+    Document   : layout
+    Created on : Sep 10, 2011, 12:15:55 AM
+    Author     : Greg Bueno
+    Description:
+        Uses the Minimalist Design and Sleepy Hollow color schemes from the
+    Color Schemer Gallery.
+*/
+#masthead {
+  margin-top: 1.5em; }
+  #masthead ul {
+    list-style-type: none; }
+  #masthead #logo {
+    margin-bottom: 1em; }
+
+#nav-column-1 {
+  text-align: center; }
+
+#nav-column-2 {
+  text-align: center; }
+
+#nav-main li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-left: 24px; }
+
+#nav-social li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-left: 6px; }
+
+#album_player {
+  margin: 0 0 1em; }
+
+input[type=text], input[type=password], input[type=email], select, textarea {
+  border: 1px solid #402C29;
+  border-radius: 3px;
+  padding: 4px;
+  background-color: #F2F2F2; }
+
+table.track-table {
+  border: 1px dotted #402C29;
+  border-collapse: collapse; }
+  table.track-table thead th {
+    border: 1px dotted #999;
+    font-size: 7pt;
+    color: #FFF;
+    background-color: #333; }
+  table.track-table tbody tr:nth-child(2n) td {
+    background-color: #CBCBCB; }
+  table.track-table tbody td.track-column {
+    width: 50px; }
+  table.track-table tbody td.play-column {
+    width: 20px; }
+
+ul.album-list {
+  list-style: none;
+  margin: 0 0 1.5em 0;
+  padding: 0; }
+  ul.album-list li {
+    display: inline; }
+
+ul.column-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  ul.column-list li {
+    display: inline-block;
+    margin-right: 10px;
+    height: 3em;
+    min-width: 230px;
+    width: 270px;
+    vertical-align: top; }
+
+.bubble {
+  border: 1px solid #CBCBCB;
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 1em; }
+
+/* This rule is no longer named accurately */
+ul.two-column-bubble-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+ul.two-column-bubble-list > li {
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #CBCBCB;
+  border-radius: 4px; }
+  ul.two-column-bubble-list > li div {
+    margin: 3px 10px; }
+    ul.two-column-bubble-list > li div label {
+      font-weight: bold;
+      width: 110px; }
+
+ol.disc-list {
+  list-style: none;
+  margin: 1.5em 0;
+  padding: 0; }
+
+ol.disc-list > li {
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #CBCBCB;
+  border-radius: 4px; }
+  ol.disc-list > li h4 {
+    margin: 10px; }
+  ol.disc-list > li div {
+    margin: 3px 0 0 10px; }
+
+ol.track-list {
+  list-style: decimal;
+  margin: 0;
+  padding: 0; }
+
+ol.track-list > li {
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #CBCBCB;
+  border-radius: 4px; }
+  ol.track-list > li div {
+    margin: 3px 10px; }
+
+ul.ecommerce-list {
+  margin: 0;
+  padding: 0; }
+
+ul.ecommerce-list > li {
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 1em;
+  min-height: 2em;
+  min-width: 230px;
+  vertical-align: top;
+  border: 1px solid #CBCBCB;
+  border-radius: 4px; }
+  ul.ecommerce-list > li div {
+    margin: 3px 10px; }
+
+.hidden {
+  display: none; }
+
+.plain-list {
+  list-style: none; }
+
+.centered {
+  text-align: center; }
+
+.button {
+  padding: 4px 10px 4px;
+  border-radius: 4px;
+  border: 1px solid #000;
+  background-color: #304B75;
+  cursor: pointer; }
+
+.cover {
+  background-color: #EFEFEF; }
+
+@media screen and (max-width: 992px) {
+  #observant-records-logo {
+    width: 100%; } }
+
+/*# sourceMappingURL=style.dev.css.map */
