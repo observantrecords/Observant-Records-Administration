@@ -2,25 +2,25 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		less: {
+		sass: {
 			production: {
 				options: {
-					cleancss: true
+					style: 'compressed'
 				},
 				files: {
-					'../../public/css/style.css': 'less/style.less'
+					'../../public/assets/css/style.css': 'sass/style.scss'
 				}
 			},
 			development: {
 				files: {
-					'../../public/css/style.dev.css': 'less/style.less'
+					'../../public/assets/css/style.dev.css': 'sass/style.scss'
 				}
 			}
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 
-	grunt.registerTask('default', ['less']);
+	grunt.registerTask('default', ['sass']);
 
 };

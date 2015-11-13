@@ -6,8 +6,8 @@
         Purpose of the stylesheet follows.
 */
 
-@pale-blue: #304B75;
-@dark-red-brown: #402C29;
+$pale-blue: #304B75;
+$dark-red-brown: #402C29;
 
 body{
   font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
@@ -19,11 +19,11 @@ body{
 
 
 a {
-	color: @pale-blue;
+	color: $pale-blue;
 }
 
 a:hover {
-	color: @dark-red-brown;
+	color: $dark-red-brown;
 }
 
 h1, h2, h3, h4, h5, h6 {
