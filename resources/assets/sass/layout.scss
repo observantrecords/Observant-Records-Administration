@@ -7,9 +7,9 @@
     Color Schemer Gallery.
 */
 
-@dark-red-brown: #402C29;
-@medium-grey: #F2F2F2;
-@light-grey: #CBCBCB;
+$dark-red-brown: #402C29;
+$medium-grey: #F2F2F2;
+$light-grey: #CBCBCB;
 
 #container {
 }
@@ -32,26 +32,26 @@
 	text-align: center;
 }
 
-.navigation-list-item {
+@mixin navigation-list-item {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
 }
 
 #nav-main li {
-	.navigation-list-item;
+	@include navigation-list-item;
 	margin-left: 24px;
 }
 #nav-social li {
-	.navigation-list-item;
+	@include navigation-list-item;
 	margin-left: 6px;
 }
 
-.container-blueprint {
+@mixin container-blueprint {
 }
 
 #content {
-	.container-blueprint;
+	@include container-blueprint;
 	#column-1 {
 	}
 	#column-2 {
@@ -67,7 +67,7 @@
 }
 
 footer {
-	.container-blueprint;
+	@include container-blueprint;
 }
 
 label
@@ -80,15 +80,15 @@ label.error, span.error
 
 input[type=text], input[type=password], input[type=email], select, textarea
 {
-	border: 1px solid @dark-red-brown;
+	border: 1px solid $dark-red-brown;
 	border-radius: 3px;
 	padding: 4px;
-	background-color: @medium-grey;
+	background-color: $medium-grey;
 }
 
 table.track-table
 {
-	border: 1px dotted @dark-red-brown;
+	border: 1px dotted $dark-red-brown;
 	border-collapse: collapse;
 	thead {
 		th
@@ -102,7 +102,7 @@ table.track-table
 	tbody {
 		tr:nth-child(2n) {
 			td {
-			    background-color: @light-grey;
+			    background-color: $light-grey;
 			}
 		}
 		td.track-column
@@ -139,18 +139,18 @@ ul.column-list {
 	}
 }
 
-.disc-track-item {
+@mixin disc-track-item {
 	margin-right: 10px;
 	margin-bottom: 1em;
 	min-height: 2em;
 	min-width: 230px;
 	vertical-align: top;
-	border: 1px solid @light-grey;
+	border: 1px solid $light-grey;
 	border-radius: 4px;
 }
 
 .bubble {
-	border: 1px solid @light-grey;
+	border: 1px solid $light-grey;
 	border-radius: 4px;
 	padding: 3px 10px;
 	margin-bottom: 1em;
@@ -164,7 +164,7 @@ ul.two-column-bubble-list {
 }
 
 ul.two-column-bubble-list>li {
-	.disc-track-item;
+	@include disc-track-item;
 	div {
 		margin: 3px 10px;
 		label {
@@ -182,7 +182,7 @@ ol.disc-list {
 
 ol.disc-list>li {
 	display: block;
-	.disc-track-item;
+	@include disc-track-item;
 	h4 {
 		margin: 10px;
 	}
@@ -201,7 +201,7 @@ ol.track-list>li {
 	display: block;
 	margin-left: 10px;
 	margin-right: 10px;
-	.disc-track-item;
+	@include disc-track-item;
 	div {
 		margin: 3px 10px;
 	}
@@ -214,7 +214,7 @@ ul.ecommerce-list {
 
 ul.ecommerce-list>li {
 	display: block;
-	.disc-track-item;
+	@include disc-track-item;
 	div {
 		margin: 3px 10px;
 	}
