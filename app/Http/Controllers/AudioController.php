@@ -155,7 +155,7 @@ class AudioController extends Controller {
 		$recordings = $recording_songs->lists('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {
 			$recordings[$r] = empty($recording) ? 'ISRC no. not set' : $recording;
-			$recordings[$r] .= ' (' . $recording_songs->find($r)->song->song_title . ')';
+			$recordings[$r] .= (!empty($recording_songs->find($r)->song->song_title)) ? ' (' . $recording_songs->find($r)->song->song_title . ')' : ' [Unassigned]';
 		}
 
 		$recordings = array(0 => '&nbsp;') + $recordings->toArray();
