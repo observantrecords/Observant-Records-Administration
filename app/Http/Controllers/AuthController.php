@@ -37,14 +37,12 @@ class AuthController extends Controller
 		$credentials = $this->getCredentials($request);
 
 		if (Auth::attempt($credentials, $request->has('remember'))) {
-			return redirect()->intended($this->redirectPath());
+			return redirect()->intended($this->redirectPath())->with('message', "Login successful.");
 		}
 
 		return redirect($this->loginPath())
 			->withInput($request->only('user_name', 'remember'))
-			->withErrors([
-				'user_name' => $this->getFailedLoginMessage(),
-			]);
+			->with('error', $this->getFailedLoginMessage());
 	}
 
 	/**
