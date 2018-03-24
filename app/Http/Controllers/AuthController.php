@@ -6,9 +6,9 @@
  * Time: 2:09 PM
  */
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;

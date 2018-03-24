@@ -1,10 +1,10 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Release;
-use ObservantRecords\App\Admin\Models\Track;
-use ObservantRecords\App\Admin\Models\Ecommerce;
+use App\Models\Release;
+use App\Models\Track;
+use App\Models\Ecommerce;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -76,7 +76,7 @@ class EcommerceController extends Controller {
 			$release_list = Release::with('album')->orderBy('release_catalog_num')->get();
 		}
 
-		$releases = $release_list->lists('release_catalog_num', 'release_id');
+		$releases = $release_list->pluck('release_catalog_num', 'release_id');
 		foreach ($releases as $r => $release_item) {
 			$releases[$r] = $release_item . ' (' . $release_list->find($r)->album->album_title . ')';
 		}
@@ -87,7 +87,7 @@ class EcommerceController extends Controller {
 		$method_variables = array(
 			'ecommerce' => $ecommerce,
 			'releases' => $releases,
-			'labels' => json_encode($labels->lists('ecommerce_label')),
+			'labels' => json_encode($labels->pluck('ecommerce_label')),
 		);
 
 		$data = array_merge($method_variables, $this->layout_variables);
@@ -148,7 +148,7 @@ class EcommerceController extends Controller {
 	public function edit($id)
 	{
 		$release_list = Release::with('album')->whereHas('album', function ($q) use ($id) { $q->where('album_artist_id', $id->release->album->album_artist_id); })->orderBy('release_catalog_num')->get();
-		$releases = $release_list->lists('release_catalog_num', 'release_id');
+		$releases = $release_list->pluck('release_catalog_num', 'release_id');
 		foreach ($releases as $r => $release_item) {
 			$releases[$r] = $release_item . ' (' . $release_list->find($r)->album->album_title . ')';
 		}
@@ -159,7 +159,7 @@ class EcommerceController extends Controller {
 		$method_variables = array(
 			'ecommerce' => $id,
 			'releases' => $releases,
-			'labels' => json_encode($labels->lists('ecommerce_label')),
+			'labels' => json_encode($labels->pluck('ecommerce_label')),
 		);
 
 		$data = array_merge($method_variables, $this->layout_variables);

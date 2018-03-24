@@ -1,11 +1,11 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Album;
-use ObservantRecords\App\Admin\Models\Release;
-use ObservantRecords\App\Admin\Models\ReleaseFormat;
-use ObservantRecords\App\Admin\Models\Track;
+use App\Models\Album;
+use App\Models\Release;
+use App\Models\ReleaseFormat;
+use App\Models\Track;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -59,12 +59,12 @@ class ReleaseController extends Controller {
 		if (!empty($album_id)) {
 			$release->release_album_id = $album_id;
 			$release->album = Album::find($album_id);
-			$albums = Album::where('album_artist_id', $release->album->album_artist_id)->orderBy('album_title')->lists('album_title', 'album_id');
+			$albums = Album::where('album_artist_id', $release->album->album_artist_id)->orderBy('album_title')->pluck('album_title', 'album_id');
 		} else {
-			$albums = Album::orderBy('album_title')->lists('album_title', 'album_id');
+			$albums = Album::orderBy('album_title')->pluck('album_title', 'album_id');
 		}
 
-		$formats = ReleaseFormat::all()->lists('format_alias', 'format_id');
+		$formats = ReleaseFormat::all()->pluck('format_alias', 'format_id');
 
 		$method_variables = array(
 			'release' => $release,
@@ -134,8 +134,8 @@ class ReleaseController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$albums = Album::where('album_artist_id', $id->album->album_artist_id)->orderBy('album_title')->lists('album_title', 'album_id');
-		$formats = ReleaseFormat::lists('format_alias', 'format_id');
+		$albums = Album::where('album_artist_id', $id->album->album_artist_id)->orderBy('album_title')->pluck('album_title', 'album_id');
+		$formats = ReleaseFormat::pluck('format_alias', 'format_id');
 
 		$method_variables = array(
 			'release' => $id,

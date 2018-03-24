@@ -1,11 +1,11 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Artist;
-use ObservantRecords\App\Admin\Models\Song;
-use ObservantRecords\App\Admin\Models\Recording;
-use ObservantRecords\App\Admin\Models\RecordingISRC;
+use App\Models\Artist;
+use App\Models\Song;
+use App\Models\Recording;
+use App\Models\RecordingISRC;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -36,7 +36,7 @@ class RecordingController extends Controller {
 		}
 		$recordings->load('song');
 
-		$recording_list = $recordings->lists('recording_isrc_num', 'recording_id');
+		$recording_list = $recordings->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recording_list as $r => $recording) {
 			$song_title = (!empty($recordings->find($r)->song->song_title)) ? $recordings->find($r)->song->song_title : 'TBD';
 			$recording_list[$r] = $recording . ' ('. $song_title . ')';
@@ -69,10 +69,10 @@ class RecordingController extends Controller {
 			$recording->artist = Artist::find($artist_id);
 		}
 
-		$artists = Artist::orderBy('artist_last_name')->lists('artist_display_name', 'artist_id');
+		$artists = Artist::orderBy('artist_last_name')->pluck('artist_display_name', 'artist_id');
 		$artists = array(0 => '&nbsp;') + $artists->toArray();
 
-		$songs = Song::orderBy('song_title')->lists('song_title', 'song_id');
+		$songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
 		$songs = array(0 => '&nbsp;') + $songs->toArray();
 
 		$method_variables = array(
@@ -144,10 +144,10 @@ class RecordingController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$artists = Artist::orderBy('artist_last_name')->lists('artist_display_name', 'artist_id');
+		$artists = Artist::orderBy('artist_last_name')->pluck('artist_display_name', 'artist_id');
 		$artists = array(0 => '&nbsp;') + $artists->toArray();
 
-		$songs = Song::orderBy('song_title')->lists('song_title', 'song_id');
+		$songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
 		$songs = array(0 => '&nbsp;') + $songs->toArray();
 
 		$method_variables = array(
