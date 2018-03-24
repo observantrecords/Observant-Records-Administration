@@ -6,7 +6,7 @@
  * Time: 5:38 PM
  */
 
-namespace ObservantRecords\App\Admin\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,19 +33,19 @@ class Track extends Model {
 	);
 
 	public function release() {
-		return $this->belongsTo('ObservantRecords\App\Admin\Models\Release', 'track_release_id', 'release_id');
+		return $this->belongsTo('App\Models\Release', 'track_release_id', 'release_id');
 	}
 
 	public function song() {
-		return $this->hasOne('ObservantRecords\App\Admin\Models\Song', 'song_id', 'track_song_id');
+		return $this->hasOne('App\Models\Song', 'song_id', 'track_song_id');
 	}
 
 	public function recording() {
-		return $this->hasOne('ObservantRecords\App\Admin\Models\Recording', 'recording_id', 'track_recording_id');
+		return $this->hasOne('App\Models\Recording', 'recording_id', 'track_recording_id');
 	}
 
 	public function ecommerce() {
-		return $this->hasMany('ObservantRecords\App\Admin\Models\Ecommerce', 'ecommerce_track_id', 'track_id');
+		return $this->hasMany('App\Models\Ecommerce', 'ecommerce_track_id', 'track_id');
 	}
 
 	public function findReleaseTracks($release_id) {

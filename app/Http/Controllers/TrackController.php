@@ -1,11 +1,11 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Release;
-use ObservantRecords\App\Admin\Models\Track;
-use ObservantRecords\App\Admin\Models\Song;
-use ObservantRecords\App\Admin\Models\Recording;
+use App\Models\Release;
+use App\Models\Track;
+use App\Models\Song;
+use App\Models\Recording;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -249,9 +249,9 @@ class TrackController extends Controller {
 	private function build_song_options($track) {
 
 		if (!empty($track->release->album->artist->artist_id)) {
-			$songs = Song::where('song_primary_artist_id', $track->release->album->artist->artist_id)->orderBy('song_title')->lists('song_title', 'song_id');
+			$songs = Song::where('song_primary_artist_id', $track->release->album->artist->artist_id)->orderBy('song_title')->pluck('song_title', 'song_id');
 		} else {
-			$songs = Song::orderBy('song_title')->lists('song_title', 'song_id');
+			$songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
 		}
 
 		$songs = array(0 => '&nbsp;') + $songs->toArray();
@@ -266,7 +266,7 @@ class TrackController extends Controller {
 			$recording_songs = Recording::with('song')->orderBy('recording_isrc_num')->get();
 		}
 
-		$recordings = $recording_songs->lists('recording_isrc_num', 'recording_id');
+		$recordings = $recording_songs->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {
 			$recordings[$r] = empty($recording) ? 'ISRC no. not set' : $recording;
 			$song_title = !empty($recording_songs->find($r)->song->song_title) ? $recording_songs->find($r)->song->song_title : 'TBD';
@@ -286,7 +286,7 @@ class TrackController extends Controller {
 			$release_titles = Release::with('album')->orderBy('release_catalog_num')->get();
 		}
 
-		$releases = $release_titles->lists('release_catalog_num', 'release_id');
+		$releases = $release_titles->pluck('release_catalog_num', 'release_id');
 		foreach ($releases as $r => $release) {
 			$releases[$r] = empty($release) ? 'Catalog no. not set' : $release;
 			$releases[$r] .= ' (' . $release_titles->find($r)->album->album_title . ')';

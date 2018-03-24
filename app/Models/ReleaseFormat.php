@@ -6,7 +6,7 @@
  * Time: 5:35 PM
  */
 
-namespace ObservantRecords\App\Admin\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

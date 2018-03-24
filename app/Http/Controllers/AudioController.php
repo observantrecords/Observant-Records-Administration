@@ -1,9 +1,9 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Recording;
-use ObservantRecords\App\Admin\Models\Audio;
+use App\Models\Recording;
+use App\Models\Audio;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -71,7 +71,7 @@ class AudioController extends Controller {
 			$s3_directories = $this->list_folders();
 		}
 
-		$recordings = $recording_songs->lists('recording_isrc_num', 'recording_id');
+		$recordings = $recording_songs->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {
 			$recordings[$r] = empty($recording) ? 'ISRC no. not set' : $recording;
 			$song_title = !empty($recording_songs->find($r)->song->song_title) ? $recording_songs->find($r)->song->song_title : 'TBD';
@@ -152,7 +152,7 @@ class AudioController extends Controller {
 		$audio_files = Audio::where('audio_recording_id', $id->audio_recording_id)->orderBy('audio_file_name')->get();
 
 		$recording_songs = Recording::with('song')->with('artist')->where('recording_artist_id', $id->recording->artist->artist_id)->orderBy('recording_isrc_num')->get();
-		$recordings = $recording_songs->lists('recording_isrc_num', 'recording_id');
+		$recordings = $recording_songs->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {
 			$recordings[$r] = empty($recording) ? 'ISRC no. not set' : $recording;
 			$recordings[$r] .= (!empty($recording_songs->find($r)->song->song_title)) ? ' (' . $recording_songs->find($r)->song->song_title . ')' : ' [Unassigned]';

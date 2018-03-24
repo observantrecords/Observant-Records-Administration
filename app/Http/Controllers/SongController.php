@@ -1,9 +1,9 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Artist;
-use ObservantRecords\App\Admin\Models\Song;
+use App\Models\Artist;
+use App\Models\Song;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -201,7 +201,7 @@ class SongController extends Controller {
 	}
 
 	private function build_artist_options() {
-		$artists = Artist::orderBy('artist_display_name')->lists('artist_display_name', 'artist_id');
+		$artists = Artist::orderBy('artist_display_name')->pluck('artist_display_name', 'artist_id');
 		$artists = array(0 => '&nbsp;') + $artists->toArray();
 
 		return $artists;

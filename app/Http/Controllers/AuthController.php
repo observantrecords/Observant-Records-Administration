@@ -6,9 +6,9 @@
  * Time: 2:09 PM
  */
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -37,14 +37,12 @@ class AuthController extends Controller
 		$credentials = $this->getCredentials($request);
 
 		if (Auth::attempt($credentials, $request->has('remember'))) {
-			return redirect()->intended($this->redirectPath());
+			return redirect()->intended($this->redirectPath())->with('message', "Login successful.");
 		}
 
 		return redirect($this->loginPath())
 			->withInput($request->only('user_name', 'remember'))
-			->withErrors([
-				'user_name' => $this->getFailedLoginMessage(),
-			]);
+			->with('error', $this->getFailedLoginMessage());
 	}
 
 	/**
