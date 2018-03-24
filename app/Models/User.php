@@ -1,6 +1,6 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Models;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -42,6 +42,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function getAuthPassword()
 	{
 		return $this->user_password;
+	}
+
+	public function setPasswordAttribute($value)
+	{
+		$this->attributres['password'] = bcrypt($value);
 	}
 
 	/**

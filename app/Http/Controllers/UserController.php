@@ -1,8 +1,8 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;

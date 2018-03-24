@@ -6,7 +6,7 @@
  * Time: 4:43 PM
  */
 
-namespace ObservantRecords\App\Admin\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +30,7 @@ class Audio extends Model {
 	);
 
 	public function recording() {
-		return $this->belongsTo('ObservantRecords\App\Admin\Models\Recording', 'audio_recording_id', 'recording_id');
+		return $this->belongsTo('App\Models\Recording', 'audio_recording_id', 'recording_id');
 	}
 
 }
