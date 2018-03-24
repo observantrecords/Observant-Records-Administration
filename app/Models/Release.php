@@ -6,7 +6,7 @@
  * Time: 5:31 PM
  */
 
-namespace ObservantRecords\App\Admin\Models;
+namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
 
@@ -37,19 +37,19 @@ class Release extends Model {
 	private $_catalog_stem;
 
 	public function album() {
-		return $this->belongsTo('ObservantRecords\App\Admin\Models\Album', 'release_album_id', 'album_id');
+		return $this->belongsTo('App\Models\Album', 'release_album_id', 'album_id');
 	}
 
 	public function tracks() {
-		return $this->hasMany('ObservantRecords\App\Admin\Models\Track', 'track_release_id', 'release_id')->orderBy('track_disc_num')->orderBy('track_track_num');
+		return $this->hasMany('App\Models\Track', 'track_release_id', 'release_id')->orderBy('track_disc_num')->orderBy('track_track_num');
 	}
 
 	public function format() {
-		return $this->hasOne('ObservantRecords\App\Admin\Models\ReleaseFormat', 'format_id', 'release_format_id');
+		return $this->hasOne('App\Models\ReleaseFormat', 'format_id', 'release_format_id');
 	}
 
 	public function ecommerce() {
-		return $this->hasMany('ObservantRecords\App\Admin\Models\Ecommerce', 'ecommerce_release_id', 'release_id');
+		return $this->hasMany('App\Models\Ecommerce', 'ecommerce_release_id', 'release_id');
 	}
 
 	public function generate_catalog_num() {

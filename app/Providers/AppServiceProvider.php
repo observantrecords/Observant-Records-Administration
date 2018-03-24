@@ -1,6 +1,6 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

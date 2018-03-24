@@ -1,0 +1,6 @@
+[2014-06-01 13:15:47] development.ERROR: exception 'InvalidArgumentException' with message 'Command "lsit" is not defined.' in /Users/gregbueno/Documents/Websites/dev-obrc/observantrecords.com/admin/vendor/symfony/console/Symfony/Component/Console/Application.php:562
+Stack trace:
+#0 /Users/gregbueno/Documents/Websites/dev-obrc/observantrecords.com/admin/vendor/symfony/console/Symfony/Component/Console/Application.php(188): Symfony\Component\Console\Application->find('lsit')
+#1 /Users/gregbueno/Documents/Websites/dev-obrc/observantrecords.com/admin/vendor/symfony/console/Symfony/Component/Console/Application.php(121): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 /Users/gregbueno/Documents/Websites/dev-obrc/observantrecords.com/admin/artisan(59): Symfony\Component\Console\Application->run()
+#3 {main} [] []

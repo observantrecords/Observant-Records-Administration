@@ -1,9 +1,9 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Artist;
-use ObservantRecords\App\Admin\Models\Song;
+use App\Models\Artist;
+use App\Models\Song;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;

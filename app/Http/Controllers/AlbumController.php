@@ -1,10 +1,10 @@
 <?php
 
-namespace ObservantRecords\App\Admin\Http\Controllers;
+namespace App\Http\Controllers;
 
-use ObservantRecords\App\Admin\Models\Artist;
-use ObservantRecords\App\Admin\Models\Album;
-use ObservantRecords\App\Admin\Models\AlbumFormat;
+use App\Models\Artist;
+use App\Models\Album;
+use App\Models\AlbumFormat;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -68,7 +68,7 @@ class AlbumController extends Controller {
 			$album->artist = Artist::find($artist_id);
 		}
 
-		$artists = Artist::orderBy('artist_last_name')->lists('artist_display_name', 'artist_id');
+		$artists = Artist::orderBy('artist_last_name')->pluck('artist_display_name', 'artist_id');
 
 		$method_variables = array(
 			'album' => $album,
@@ -132,8 +132,8 @@ class AlbumController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$releases = $id->releases->lists('release_catalog_num', 'release_id');
-		$artists = Artist::orderBy('artist_last_name')->lists('artist_display_name', 'artist_id');
+		$releases = $id->releases->pluck('release_catalog_num', 'release_id');
+		$artists = Artist::orderBy('artist_last_name')->pluck('artist_display_name', 'artist_id');
 
 		$method_variables = array(
 			'album' => $id,
