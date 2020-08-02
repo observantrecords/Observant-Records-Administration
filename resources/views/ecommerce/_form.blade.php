@@ -36,9 +36,9 @@
             <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
             <li>
                 @if (!empty( $ecommerce->ecommerce_id))
-                    <a href="{{ route( 'ecommerce.show', array( 'id' => $ecommerce->ecommerce_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'ecommerce.show', $ecommerce->ecommerce_id ) }}" class="btn btn-default">Cancel</a>
                 @elseif (!empty($ecommerce->ecommerce_release_id))
-                    <a href="{{ route( 'release.show', array( 'id' => $ecommerce->ecommerce_release_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'release.show', $ecommerce->ecommerce_release_id ) }}" class="btn btn-default">Cancel</a>
                 @else
                     <a href="{{ route( 'ecommerce.index' ) }}" class="btn btn-default">Cancel</a>
                 @endif

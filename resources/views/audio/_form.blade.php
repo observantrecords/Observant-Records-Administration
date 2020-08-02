@@ -50,9 +50,9 @@
             <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
             <li>
                 @if (!empty( $audio->audio_id))
-                    <a href="{{ route( 'audio.show', array( 'id' => $audio->audio_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'audio.show', $audio->audio_id ) }}" class="btn btn-default">Cancel</a>
                 @elseif (!empty($audio->audio_recording_id))
-                    <a href="{{ route( 'recording.show', array( 'id' => $audio->audio_recording_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'recording.show', $audio->audio_recording_id ) }}" class="btn btn-default">Cancel</a>
                 @else
                     <a href="{{ route( 'audio.index' ) }}" class="btn btn-default">Cancel</a>
                 @endif

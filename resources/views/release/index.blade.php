@@ -26,9 +26,9 @@
 	@foreach ($releases as $release)
 	<li>
 		<div>
-			<a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'release.show', array( 'id' => $release->release_id ) ) }}">{{ $release->release_catalog_num }} ({{ $release->album->album_title}})</a>
+			<a href="{{ route( 'release.edit', $release->release_id  ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route( 'release.delete', $release->release_id  ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+			<a href="{{ route( 'release.show', $release->release_id  ) }}">{{ $release->release_catalog_num }} ({{ $release->album->album_title}})</a>
 		</div>
 	</li>
 	@endforeach

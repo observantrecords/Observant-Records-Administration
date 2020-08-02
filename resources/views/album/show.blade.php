@@ -21,8 +21,8 @@
 @section('content')
 
 <ul class="list-inline">
-	<li><a href="{{ route('album.edit', array('id' => $album->album_id)) }}" class="btn btn-primary">Edit</a></li>
-	<li><a href="{{ route('album.delete', array('id' => $album->album_id)) }}" class="btn btn-warning">Delete</a></li>
+	<li><a href="{{ route('album.edit', $album->album_id) }}" class="btn btn-primary">Edit</a></li>
+	<li><a href="{{ route('album.delete', $album->album_id) }}" class="btn btn-warning">Delete</a></li>
 </ul>
 
 <ul class="two-column-bubble-list">
@@ -100,13 +100,13 @@
 		<td>
 			<div>
 				<ul class="list-inline">
-					<li><a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-pencil" title="[Edit]"></span> <span class="sr-only">Edit</span></a></li>
-					<li><a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}/"><span class="glyphicon glyphicon-remove" title="[Delete]"></span> <span class="sr-only">Delete</span></a></li>
+					<li><a href="{{ route( 'release.edit', $release->release_id ) }}/"><span class="glyphicon glyphicon-pencil" title="[Edit]"></span> <span class="sr-only">Edit</span></a></li>
+					<li><a href="{{ route( 'release.delete', $release->release_id ) }}/"><span class="glyphicon glyphicon-remove" title="[Delete]"></span> <span class="sr-only">Delete</span></a></li>
 				</ul>
 			</div>
 		</td>
 		<td>
-			<a href="{{ route( 'release.show', array( 'id' => $release->release_id ) ) }}"><img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $release->album->artist->artist_alias }}/albums/{{ $release->album->album_alias }}/{{ strtolower($release->release_catalog_num) }}/images/cover_front_small.jpg" width="50" height="50" /></a>
+			<a href="{{ route( 'release.show', $release->release_id ) }}"><img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $release->album->artist->artist_alias }}/albums/{{ $release->album->album_alias }}/{{ strtolower($release->release_catalog_num) }}/images/cover_front_small.jpg" width="50" height="50" /></a>
 		</td>
 		<td>
 			@if (!empty($release->release_catalog_num))

@@ -6,8 +6,8 @@ use App\Models\Release;
 use App\Models\Track;
 use App\Models\Song;
 use App\Models\Recording;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class TrackController extends Controller {
@@ -25,7 +25,7 @@ class TrackController extends Controller {
 	 */
 	public function index()
 	{
-		$release_id = Input::get('release');
+		$release_id = Request::get('release');
 
 		if (!empty($release_id)) {
 			$tracks = Track::where('track_release_id', $release_id)->orderBy('track_disc_num')->orderBy('track_track_num')->get();
@@ -53,7 +53,7 @@ class TrackController extends Controller {
 	{
 		$track = new Track;
 
-		$release_id = Input::get('release');
+		$release_id = Request::get('release');
 
 		if (!empty($release_id)) {
 			$release = Release::find($release_id);
@@ -103,15 +103,15 @@ class TrackController extends Controller {
 		$fields = $track->getFillable();
 
 		foreach ($fields as $field) {
-			$track->{$field} = Input::get($field);
+			$track->{$field} = Request::get($field);
 		}
 
 		$result = $track->save();
 
 		if ($result !== false) {
-			return Redirect::route('track.show', array('id' => $track->track_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('track.show', $track->track_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $track->track_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $track->track_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -172,15 +172,15 @@ class TrackController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('track.show', array('id' => $id->track_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('track.show', $id->track_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $id->track_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $id->track_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -204,7 +204,7 @@ class TrackController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$track_song_title = $id->song->song_title;
 		$release_id = $id->track_release_id;
 
@@ -214,14 +214,14 @@ class TrackController extends Controller {
 
 			// Remove track.
 			$id->delete();
-			return Redirect::route('release.show', array('id' => $id->track_release_id  ))->with('message', $track_song_title . ' was deleted.');
+			return Redirect::route('release.show', $id->track_release_id  )->with('message', $track_song_title . ' was deleted.');
 		} else {
-			return Redirect::route('track.show', array('id' => $id->track_id))->with('error', $track_song_title . ' was not deleted.');
+			return Redirect::route('track.show', $id->track_id)->with('error', $track_song_title . ' was not deleted.');
 		}
 	}
 
 	public function save_order() {
-		$tracks = Input::get('tracks');
+		$tracks = Request::get('tracks');
 
 		$is_success = true;
 		if (count($tracks) > 0) {

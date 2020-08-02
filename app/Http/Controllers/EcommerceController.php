@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Release;
 use App\Models\Track;
 use App\Models\Ecommerce;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class EcommerceController extends Controller {
@@ -24,8 +24,8 @@ class EcommerceController extends Controller {
 	 */
 	public function index()
 	{
-		$release_id = Input::get('release');
-		$track_id = Input::get('track');
+		$release_id = Request::get('release');
+		$track_id = Request::get('track');
 
 		if (!empty($release_id)) {
 			$release = Release::find($release_id);
@@ -62,7 +62,7 @@ class EcommerceController extends Controller {
 	{
 		$ecommerce = new Ecommerce;
 
-		$release_id = Input::get('release');
+		$release_id = Request::get('release');
 
 		if (!empty($release_id)) {
 			$ecommerce->ecommerce_release_id = $release_id;
@@ -108,15 +108,15 @@ class EcommerceController extends Controller {
 		$fields = $ecommerce->getFillable();
 
 		foreach ($fields as $field) {
-			$ecommerce->{$field} = Input::get($field);
+			$ecommerce->{$field} = Request::get($field);
 		}
 
 		$result = $ecommerce->save();
 
 		if ($result !== false) {
-			return Redirect::route('ecommerce.show', array('id' => $ecommerce->ecommerce_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('ecommerce.show', $ecommerce->ecommerce_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $ecommerce->ecommerce_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $ecommerce->ecommerce_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -179,15 +179,15 @@ class EcommerceController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('ecommerce.show', array('id' => $id->ecommerce_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('ecommerce.show', $id->ecommerce_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $id->ecommerce_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $id->ecommerce_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -218,21 +218,21 @@ class EcommerceController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$ecommerce_label = $id->ecommerce_label;
 		$release_id = $id->ecommerce_release_id;
 
 		if ($confirm === true) {
 			$id->delete();
-			return Redirect::route('release.show', array('id' => $release_id))->with('message', $ecommerce_label . ' was deleted.');
+			return Redirect::route('release.show', $release_id)->with('message', $ecommerce_label . ' was deleted.');
 		} else {
-			return Redirect::route('ecommerce.show', array('id' => $id->ecommerce_id))->with('error', $ecommerce_label . ' was not deleted.');
+			return Redirect::route('ecommerce.show', $id->ecommerce_id)->with('error', $ecommerce_label . ' was not deleted.');
 		}
 	}
 
 
 	public function save_order() {
-		$ecomm_links = Input::get('ecommerce');
+		$ecomm_links = Request::get('ecommerce');
 
 		$is_success = true;
 		if (count($ecomm_links) > 0) {

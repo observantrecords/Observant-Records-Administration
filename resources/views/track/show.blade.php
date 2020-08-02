@@ -26,8 +26,8 @@
 @section('content')
 
 <p>
-	<a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}" class="btn btn-primary">Edit</a>
-	<a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}" class="btn btn-default">Delete</a>
+	<a href="{{ route( 'track.edit', $track->track_id ) }}" class="btn btn-primary">Edit</a>
+	<a href="{{ route( 'track.delete', $track->track_id ) }}" class="btn btn-default">Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
@@ -72,7 +72,7 @@
 		<div>
 			<label>Recording</label>
 			@if (!empty($track->track_recording_id))
-			<a href=" {{ route('recording.show', array( 'id' => $track->track_recording_id ) ) }}/">
+			<a href=" {{ route('recording.show', $track->track_recording_id ) }}/">
 				@if (empty($track->recording->recording_isrc_num))
 				(No ISRC number set) {{ $track->song->song_title }}
 				@else
@@ -100,7 +100,7 @@
 </p>
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route('release.show', array( 'id' => $track->track_release_id )) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @endif</a></li>
+	<li>&laquo; <a href="{{ route('release.show', $track->track_release_id ) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @endif</a></li>
 </ul>
 
 @stop

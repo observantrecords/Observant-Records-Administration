@@ -6,8 +6,8 @@ use App\Models\Album;
 use App\Models\Release;
 use App\Models\ReleaseFormat;
 use App\Models\Track;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class ReleaseController extends Controller {
@@ -25,7 +25,7 @@ class ReleaseController extends Controller {
 	 */
 	public function index()
 	{
-		$album_id = Input::get('album');
+		$album_id = Request::get('album');
 		if (!empty($album_id)) {
 			$releases = Release::where('release_album_id', $album_id)->orderBy('release_catalog_num')->get();
 		} else {
@@ -54,7 +54,7 @@ class ReleaseController extends Controller {
 		$release = new Release;
 		$release->release_release_date = date('Y-m-d');
 
-		$album_id = Input::get('album');
+		$album_id = Request::get('album');
 
 		if (!empty($album_id)) {
 			$release->release_album_id = $album_id;
@@ -90,15 +90,15 @@ class ReleaseController extends Controller {
 		$fields = $release->getFillable();
 
 		foreach ($fields as $field) {
-			$release->{$field} = Input::get($field);
+			$release->{$field} = Request::get($field);
 		}
 
 		$result = $release->save();
 
 		if ($result !== false) {
-			return Redirect::route('release.show', array('id' => $release->release_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('release.show', $release->release_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('album.show', array('id' => $release->release_album_id) )->with('error', 'Your changes were not saved.');
+			return Redirect::route('album.show', $release->release_album_id )->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -160,15 +160,15 @@ class ReleaseController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('release.show', array('id' => $id->release_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('release.show', $id->release_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('album.show', array('id' => $id->release_album_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('album.show', $id->release_album_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -193,7 +193,7 @@ class ReleaseController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$release_catalog_num = $id->release_catalog_num;
 		$album_id = $id->release_album_id;
 
@@ -214,9 +214,9 @@ class ReleaseController extends Controller {
 
 			// Remove releases.
 			$id->delete();
-			return Redirect::route('album.show', array('id' => $album_id  ))->with('message', 'The record was deleted.');
+			return Redirect::route('album.show', $album_id  )->with('message', 'The record was deleted.');
 		} else {
-			return Redirect::route('release.show', array('id' => $id->release_id))->with('error', 'The record was not deleted.');
+			return Redirect::route('release.show', $id->release_id)->with('error', 'The record was not deleted.');
 		}
 	}
 

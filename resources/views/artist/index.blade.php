@@ -25,9 +25,9 @@
 	<li>
 		<div>
 			<ul class="list-inline">
-				<li><a href="{{ route('artist.edit', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-pencil"></span> <span class="sr-only">Edit</span></a></li>
-				<li><a href="{{ route('artist.delete', array('id' => $artist->artist_id) ) }}"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Delete</span></a></li>
-				<li><a href="{{ route('artist.show', array('id' => $artist->artist_id) ) }}" title="[View {{ $artist->artist_display_name }}]">{{ $artist->artist_display_name }}</a></li>
+				<li><a href="{{ route('artist.edit', $artist->artist_id ) }}"><span class="glyphicon glyphicon-pencil"></span> <span class="sr-only">Edit</span></a></li>
+				<li><a href="{{ route('artist.delete', $artist->artist_id ) }}"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Delete</span></a></li>
+				<li><a href="{{ route('artist.show', $artist->artist_id ) }}" title="[View {{ $artist->artist_display_name }}]">{{ $artist->artist_display_name }}</a></li>
 			</ul>
 		</div>
 	</li>

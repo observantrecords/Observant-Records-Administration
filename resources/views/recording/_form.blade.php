@@ -38,9 +38,9 @@
             <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
             <li>
                 @if (!empty( $recording->recording_id))
-                    <a href="{{ route( 'recording.show', array( 'id' => $recording->recording_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'recording.show', $recording->recording_id ) }}" class="btn btn-default">Cancel</a>
                 @elseif (!empty($recording->recording_artist_id))
-                    <a href="{{ route( 'artist.show', array( 'id' => $recording->recording_artist_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'artist.show', $recording->recording_artist_id ) }}" class="btn btn-default">Cancel</a>
                 @else
                     <a href="{{ route( 'recording.index' ) }}" class="btn btn-default">Cancel</a>
                 @endif
