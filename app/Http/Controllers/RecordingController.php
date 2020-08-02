@@ -6,8 +6,8 @@ use App\Models\Artist;
 use App\Models\Song;
 use App\Models\Recording;
 use App\Models\RecordingISRC;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class RecordingController extends Controller {
@@ -25,7 +25,7 @@ class RecordingController extends Controller {
 	 */
 	public function index()
 	{
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 
 		if (!empty($artist_id)) {
 			$artist = Artist::find($artist_id);
@@ -63,7 +63,7 @@ class RecordingController extends Controller {
 	{
 		$recording = new Recording;
 
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 		if (!empty($artist_id)) {
 			$recording->recording_artist_id = $artist_id;
 			$recording->artist = Artist::find($artist_id);
@@ -99,19 +99,19 @@ class RecordingController extends Controller {
 		$fields = $recording->getFillable();
 
 		foreach ($fields as $field) {
-			$recording->{$field} = Input::get($field);
+			$recording->{$field} = Request::get($field);
 		}
 
 		$result = $recording->save();
 
 		if ($result !== false) {
-			$recording_isrc_num = Input::get('recording_isrc_num');
+			$recording_isrc_num = Request::get('recording_isrc_num');
 			if (!empty($recording_isrc_num)) {
 				$isrc = RecordingISRC::where('isrc_code', $recording_isrc_num)->first();
 				$isrc->isrc_recording_id = $recording->recording_id;
 				$isrc->save();
 			}
-			return Redirect::route('recording.show', array('id' => $recording->recording_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('recording.show', $recording->recording_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('recording.index', array('artist' => $recording->recording_artist_id))->with('error', 'Your changes were not saved.');
 		}
@@ -173,10 +173,10 @@ class RecordingController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
-		$recording_isrc_num = Input::get('recording_isrc_num');
+		$recording_isrc_num = Request::get('recording_isrc_num');
 		if (!empty($recording_isrc_num)) {
 			$isrc = RecordingISRC::where('isrc_code', $recording_isrc_num)->first();
 			$isrc->isrc_recording_id = $id->recording_id;
@@ -186,7 +186,7 @@ class RecordingController extends Controller {
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('recording.show', array('id' => $id->recording_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('recording.show', $id->recording_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('recording.index', array('artist' => $id->recording_artist_id))->with('error', 'Your changes were not saved.');
 		}
@@ -212,7 +212,7 @@ class RecordingController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$recording_isrc_num = $id->recording_isrc_num;
 
 		if ($confirm === true) {
@@ -226,7 +226,7 @@ class RecordingController extends Controller {
 			$id->delete();
 			return Redirect::route('recording.index', array('artist' => $id->recording_artist_id) )->with('message', $recording_isrc_num . ' was deleted.');
 		} else {
-			return Redirect::route('recording.show', array('id' => $id->recording_id  ))->with('error', $recording_isrc_num . ' was not deleted.');
+			return Redirect::route('recording.show', $id->recording_id )->with('error', $recording_isrc_num . ' was not deleted.');
 		}
 	}
 

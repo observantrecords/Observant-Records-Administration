@@ -26,9 +26,9 @@
             @foreach ($users as $user)
                 <li>
                     <div>
-                        <a href="{{ route( 'user.edit', array( 'id' => $user->user_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="{{ route( 'user.delete', array( 'id' => $user->user_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-                        <a href="{{ route( 'user.show', array( 'id' => $user->user_id ) ) }}">{{ $user->user_name }}</a>
+                        <a href="{{ route( 'user.edit', $user->user_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="{{ route( 'user.delete', $user->user_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="{{ route( 'user.show', $user->user_id ) }}">{{ $user->user_name }}</a>
                     </div>
                 </li>
             @endforeach

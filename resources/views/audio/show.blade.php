@@ -28,8 +28,8 @@
 
 @section('content')
 <p>
-	<a href="{{ route( 'audio.edit', array( 'id' => $audio->audio_id ) ) }}" class="btn btn-primary">Edit</a>
-	<a href="{{ route( 'audio.delete', array( 'id' => $audio->audio_id ) ) }}" class="btn btn-warning">Delete</a>
+	<a href="{{ route( 'audio.edit', $audio->audio_id ) }}" class="btn btn-primary">Edit</a>
+	<a href="{{ route( 'audio.delete', $audio->audio_id ) }}" class="btn btn-warning">Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
@@ -61,7 +61,7 @@
 	<li>
 		<div>
 			<label>Recording</label>
-			<a href="{{ route( 'recording.show', array( 'id' => $audio->recording->recording_id ) ) }}">
+			<a href="{{ route( 'recording.show', $audio->recording->recording_id ) }}">
 				@if (empty($audio->recording->recording_isrc_num))
 				ISRC TBD
 				@else

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Recording;
 use App\Models\Audio;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Aws\S3\S3Client;
@@ -25,7 +24,7 @@ class AudioController extends Controller {
 	 */
 	public function index()
 	{
-		$recording_id = Input::get('recording');
+		$recording_id = Request::get('recording');
 
 		if (!empty($recording_id)) {
 			$recording = Recording::find($recording_id);
@@ -56,7 +55,7 @@ class AudioController extends Controller {
 	{
 		$audio = new Audio;
 
-		$recording_id = Input::get('recording');
+		$recording_id = Request::get('recording');
 
 		if (!empty($recording_id)) {
 			$audio->audio_recording_id = $recording_id;
@@ -110,13 +109,13 @@ class AudioController extends Controller {
 		$fields = $audio->getFillable();
 
 		foreach ($fields as $field) {
-			$audio->{$field} = Input::get($field);
+			$audio->{$field} = Request::get($field);
 		}
 
 		$result = $audio->save();
 
 		if ($result !== false) {
-			return Redirect::route('audio.show', array('id' => $audio->audio_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('audio.show', $audio->audio_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('audio.index')->with('error', 'Your changes were not saved.');
 		}
@@ -187,15 +186,15 @@ class AudioController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('audio.show', array('id' => $id->audio_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('audio.show', $id->audio_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('recording.show', array('id' => $id->audio_recording_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('recording.show', $id->audio_recording_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -226,15 +225,15 @@ class AudioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$audio_file_name = $id->audio_file_name;
 		$recording_id = $id->audio_recording_id;
 
 		if ($confirm === true) {
 			$id->delete();
-			return Redirect::route('recording.show', array( 'id' => $recording_id ))->with('message', $audio_file_name . ' was deleted.');
+			return Redirect::route('recording.show', $recording_id)->with('message', $audio_file_name . ' was deleted.');
 		} else {
-			return Redirect::route('audio.show', array('id' => $id->audio_id))->with('error', $audio_file_name . ' was not deleted.');
+			return Redirect::route('audio.show', $id->audio_id)->with('error', $audio_file_name . ' was not deleted.');
 		}
 	}
 

@@ -39,9 +39,9 @@
 	@foreach ($songs as $song)
 	<li @if (!empty($rsSong->song_author)) class="cover" @endif>
 	<div>
-		<a href="{{ route('song.edit', array( 'id' => $song->song_id ) ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a>
-		<a href="{{ route('song.delete', array( 'id' => $song->song_id ) ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a>
-		<a href="{{ route('song.show', array( 'id' => $song->song_id ) ) }}">{{ $song->song_title }}</a>
+		<a href="{{ route('song.edit', $song->song_id ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a href="{{ route('song.delete', $song->song_id ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a>
+		<a href="{{ route('song.show', $song->song_id ) }}">{{ $song->song_title }}</a>
 	</div>
 	</li>
 	@endforeach

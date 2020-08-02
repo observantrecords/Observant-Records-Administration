@@ -15,8 +15,8 @@
 @section('content')
 
 <ul class="list-inline">
-	<li><a href="{{ route('artist.edit', array('id' => $artist->artist_id)) }}" class="btn btn-primary">Edit</a></li>
-	<li><a href="{{ route('artist.delete', array('id' => $artist->artist_id)) }}" class="btn btn-warning">Delete</a></li>
+	<li><a href="{{ route('artist.edit', $artist->artist_id) }}" class="btn btn-primary">Edit</a></li>
+	<li><a href="{{ route('artist.delete', $artist->artist_id) }}" class="btn btn-warning">Delete</a></li>
 </ul>
 
 <ul class="two-column-bubble-list">
@@ -73,10 +73,10 @@
 	<li>
 		<div>
 			<ul class="list-inline">
-				<li><a href="{{ route( 'album.edit', array( 'id' => $album->album_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
-				<li><a href="{{ route( 'album.delete', array( 'id' => $album->album_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li><a href="{{ route( 'album.edit', $album->album_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li><a href="{{ route( 'album.delete', $album->album_id ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
 				<li>
-					<span class="album-order-display">{{ $album->album_order }}</span>. <a href="{{ route( 'album.show', array( 'id' => $album->album_id ) ) }}">{{ $album->album_title }}</a>
+					<span class="album-order-display">{{ $album->album_order }}</span>. <a href="{{ route( 'album.show', $album->album_id ) }}">{{ $album->album_title }}</a>
 					{!! Form::hidden('album_id', $album->album_id) !!}
 					{!! Form::hidden('album_order', $album->album_order) !!}
 				</li>
