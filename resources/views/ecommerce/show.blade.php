@@ -12,8 +12,8 @@
 @section('content')
 
 <p>
-	<a href="{{ route('ecommerce.edit', array('id' => $ecommerce->ecommerce_id)) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-	<a href="{{ route('ecommerce.delete', array('id' => $ecommerce->ecommerce_id)) }}" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+	<a href="{{ route('ecommerce.edit', $ecommerce->ecommerce_id) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+	<a href="{{ route('ecommerce.delete', $ecommerce->ecommerce_id) }}" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span> Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
@@ -42,6 +42,6 @@
 </p>
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route('release.show', array( 'id' => $ecommerce->ecommerce_release_id )) }}/">Back to <em>{{ $ecommerce->release->album->album_title }}</em> @if (!empty($ecommerce->release->release_catalog_num)) ({{ $ecommerce->release->release_catalog_num }}) @endif</a></li>
+	<li>&laquo; <a href="{{ route('release.show', $ecommerce->ecommerce_release_id ) }}/">Back to <em>{{ $ecommerce->release->album->album_title }}</em> @if (!empty($ecommerce->release->release_catalog_num)) ({{ $ecommerce->release->release_catalog_num }}) @endif</a></li>
 </ul>
 @stop

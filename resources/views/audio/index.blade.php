@@ -23,9 +23,9 @@
 	@foreach ($audio_files as $audio)
 	<li>
 		<div>
-			<a href="{{ route('audio.edit', array('id' => $audio->audio_id) ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route('audio.delete', array('id' => $audio->audio_id) ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route('audio.show', array('id' => $audio->audio_id) ) }}" title="{{ $audio->audio_file_server}}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}">{{ $audio->audio_file_name }}</a>
+			<a href="{{ route('audio.edit', $audio->audio_id ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route('audio.delete', $audio->audio_id ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a>
+			<a href="{{ route('audio.show', $audio->audio_id ) }}" title="{{ $audio->audio_file_server}}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}">{{ $audio->audio_file_name }}</a>
 		</div>
 	</li>
 	@endforeach

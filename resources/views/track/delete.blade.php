@@ -68,8 +68,8 @@
 </p>
 
 <ul>
-	<li><a href="{{ route('track.show', array( 'id' => $track->track_id )) }}/">Back to <em>{{ $track->song->song_title }}</em></a></li>
-	<li><a href="{{ route('release.show', array( 'id' => $track->release->release_id )) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @else (TBD) @endif</a></li>
+	<li><a href="{{ route('track.show', $track->track_id ) }}/">Back to <em>{{ $track->song->song_title }}</em></a></li>
+	<li><a href="{{ route('release.show', $track->release->release_id ) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @else (TBD) @endif</a></li>
 </ul>
 @endif
 @stop

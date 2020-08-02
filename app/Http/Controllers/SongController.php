@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use App\Models\Song;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class SongController extends Controller {
@@ -23,7 +23,7 @@ class SongController extends Controller {
 	 */
 	public function index()
 	{
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 
 		if (!empty($artist_id)) {
 			$songs = Song::where('song_primary_artist_id', $artist_id)->orderBy('song_title')->get();
@@ -53,7 +53,7 @@ class SongController extends Controller {
 	{
 		$song = new Song;
 
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 
 		if (!empty($artist_id)) {
 			$song->song_primary_artist_id = $artist_id;
@@ -85,15 +85,15 @@ class SongController extends Controller {
 		$fields = $song->getFillable();
 
 		foreach ($fields as $field) {
-			$song->{$field} = Input::get($field);
+			$song->{$field} = Request::get($field);
 		}
 
 		$result = $song->save();
 
 		if ($result !== false) {
-			return Redirect::route('song.show', array('id' => $song->song_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('song.show', $song->song_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('song.index', array('artist' => $song->song_primary_artist_id) )->with('error', 'Your changes were not saved.');
+			return Redirect::route('song.index', $song->song_primary_artist_id )->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -148,13 +148,13 @@ class SongController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('song.show', array('id' => $id->song_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('song.show', $id->song_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('song.index', array('artist' => $id->song_primary_artist_id) )->with('error', 'Your changes were not saved.');
 		}
@@ -180,7 +180,7 @@ class SongController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$song_title = $id->song_title;
 		$artist_id = $id->song_primary_artist_id;
 
@@ -195,7 +195,7 @@ class SongController extends Controller {
 			$id->delete();
 			return Redirect::route('song.index', array('artist' => $artist_id  ))->with('message', $song_title . ' was deleted.');
 		} else {
-			return Redirect::route('song.show', array('id' => $id->song_id))->with('error', $song_title . ' was not deleted.');
+			return Redirect::route('song.show', $id->song_id)->with('error', $song_title . ' was not deleted.');
 		}
 
 	}

@@ -28,8 +28,8 @@
 @section('content')
 
 <p>
-	<a href="{{ route( 'recording.edit', array( 'id' => $recording->recording_id ) ) }}" class="btn btn-primary">Edit</a>
-	<a href="{{ route( 'recording.delete', array( 'id' => $recording->recording_id ) ) }}" class="btn btn-warning">Delete</a>
+	<a href="{{ route( 'recording.edit', $recording->recording_id ) }}" class="btn btn-primary">Edit</a>
+	<a href="{{ route( 'recording.delete', $recording->recording_id ) }}" class="btn btn-warning">Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
@@ -62,9 +62,9 @@
 	<li>
 		<div>
 			<ul class="list-inline">
-				<li><a href="{{ route( 'audio.edit', array('id' => $audio->audio_id) ) }}" title="[Edit audio]"><span class="glyphicon glyphicon-pencil"></span></a></li>
-				<li><a href="{{ route( 'audio.delete', array('id' => $audio->audio_id) ) }}" title="[Remove audio]"><span class="glyphicon glyphicon-remove"></span></a></li>
-				<li><a href="{{ route( 'audio.show', array('id' => $audio->audio_id) ) }}" title="[{{ $audio->audio_file_server }}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}]">{{ $audio->audio_file_name }}</a></li>
+				<li><a href="{{ route( 'audio.edit', $audio->audio_id ) }}" title="[Edit audio]"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li><a href="{{ route( 'audio.delete', $audio->audio_id ) }}" title="[Remove audio]"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li><a href="{{ route( 'audio.show', $audio->audio_id ) }}" title="[{{ $audio->audio_file_server }}{{ $audio->audio_file_path }}/{{ $audio->audio_file_name }}]">{{ $audio->audio_file_name }}</a></li>
 			</ul>
 		</div>
 	</li>

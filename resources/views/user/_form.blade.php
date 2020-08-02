@@ -47,7 +47,7 @@
                 <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
                 <li>
                     @if (!empty( $user->user_id))
-                        <a href="{{ route( 'user.show', array( 'id' => $user->user_id ) ) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route( 'user.show', $user->user_id ) }}" class="btn btn-default">Cancel</a>
                     @else
                         <a href="{{ route( 'user.index' ) }}" class="btn btn-default">Cancel</a>
                     @endif

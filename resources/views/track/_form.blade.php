@@ -98,9 +98,9 @@
                 <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
                 <li>
                     @if (!empty( $track->track_id))
-                        <a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route( 'track.show', $track->track_id ) }}" class="btn btn-default">Cancel</a>
                     @elseif (!empty($track->track_release_id))
-                        <a href="{{ route( 'release.show', array( 'id' => $track->track_release_id ) ) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route( 'release.show', $track->track_release_id ) }}" class="btn btn-default">Cancel</a>
                     @else
                         <a href="{{ route( 'track.index' ) }}" class="btn btn-default">Cancel</a>
                     @endif

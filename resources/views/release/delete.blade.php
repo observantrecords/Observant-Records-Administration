@@ -68,7 +68,7 @@
 </p>
 
 <ul>
-	<li><a href="{{ route('release.show', array( 'id' => $release->release_id )) }}/">Back to <em>{{ $release->album->album_title }}</em> @if (!empty($release->release_catalog_num)) ({{ $release->release_catalog_num }}) @else (TBD) @endif </a></li>
+	<li><a href="{{ route('release.show', $release->release_id ) }}/">Back to <em>{{ $release->album->album_title }}</em> @if (!empty($release->release_catalog_num)) ({{ $release->release_catalog_num }}) @else (TBD) @endif </a></li>
 </ul>
 
 @stop

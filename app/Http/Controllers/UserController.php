@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -66,14 +66,14 @@ class UserController extends Controller
 		$fields = $user->getFillable();
 
 		foreach ($fields as $field) {
-			$user->{$field} = Input::get($field);
+			$user->{$field} = Request::get($field);
 		}
-		$user->user_password = Hash::make(Input::get('user_password'));
+		$user->user_password = Hash::make(Request::get('user_password'));
 
 		$result = $user->save();
 
 		if ($result !== false) {
-			return Redirect::route('user.show', array('id' => $user->user_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('user.show', $user->user_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('user.index')->with('error', 'Your changes were not saved.');
 		}
@@ -124,16 +124,16 @@ class UserController extends Controller
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		// If users fill out their old password, they want to change it.
-		$old_password = Input::get('old_password');
+		$old_password = Request::get('old_password');
 		if (!empty($old_password)) {
 			// Verify the old password is correct.
 			if (Hash::check($old_password, $id->user_password)) {
 				// Change the password.
-				$new_password = Input::get('new_password');
+				$new_password = Request::get('new_password');
 				$id->user_password = Hash::make($new_password);
 			}
 		}
@@ -141,7 +141,7 @@ class UserController extends Controller
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('artist.show', array('id' => $id->artist_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('artist.show', $id->artist_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('artist.index')->with('error', 'Your changes were not saved.');
 		}
@@ -172,7 +172,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$user_name = $id->user_name;
 
 		if ($confirm === true) {
@@ -189,7 +189,7 @@ class UserController extends Controller
 
 			return Redirect::route('user.index')->with('message', $user_name . ' was deleted.');
 		} else {
-			return Redirect::route('user.show', array('id' => $id->user_id))->with('error', $user_name . ' was not deleted.');
+			return Redirect::route('user.show', $id->user_id)->with('error', $user_name . ' was not deleted.');
 		}
     }
 }

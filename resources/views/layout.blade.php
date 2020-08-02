@@ -73,7 +73,7 @@
 					<li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
 				@else
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('user.show', array( 'id' => \Illuminate\Support\Facades\Auth::user()->user_id ) ) }}">
+						<a class="nav-link" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::user()->user_id ) }}">
 							Profile
 						</a>
 					</li>

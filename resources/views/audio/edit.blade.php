@@ -44,6 +44,6 @@
 @endif
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route( 'audio.show', array( 'id' => $audio->audio_id ) ) }}">Back to {{ $audio->audio_file_name }}</a></li>
+	<li>&laquo; <a href="{{ route( 'audio.show', $audio->audio_id ) }}">Back to {{ $audio->audio_file_name }}</a></li>
 </ul>
 @stop

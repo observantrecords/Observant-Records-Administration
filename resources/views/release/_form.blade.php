@@ -81,9 +81,9 @@
             <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
             <li>
                 @if (!empty( $release->release_id))
-                    <a href="{{ route( 'release.show', array( 'id' => $release->release_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'release.show', $release->release_id ) }}" class="btn btn-default">Cancel</a>
                 @elseif (!empty($release->release_album_id))
-                    <a href="{{ route( 'album.show', array( 'id' => $release->release_album_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'album.show', $release->release_album_id ) }}" class="btn btn-default">Cancel</a>
                 @else
                     <a href="{{ route( 'release.index' ) }}" class="btn btn-default">Cancel</a>
                 @endif

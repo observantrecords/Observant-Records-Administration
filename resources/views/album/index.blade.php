@@ -26,9 +26,9 @@
 	@foreach ($albums as $album)
 	<li>
 		<div>
-			<a href="{{ route( 'album.edit', array( 'id' => $album->album_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'album.delete', array( 'id' => $album->album_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'album.show', array( 'id' => $album->album_id ) ) }}">{{ $album->album_title }} ({{ $album->artist->artist_display_name}})</a>
+			<a href="{{ route( 'album.edit', $album->album_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route( 'album.delete', $album->album_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+			<a href="{{ route( 'album.show', $album->album_id ) }}">{{ $album->album_title }} ({{ $album->artist->artist_display_name}})</a>
 		</div>
 	</li>
 	@endforeach

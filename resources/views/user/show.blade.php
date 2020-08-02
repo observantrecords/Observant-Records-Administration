@@ -15,8 +15,8 @@
 @section('content')
 
     <ul class="list-inline">
-        <li><a href="{{ route('user.edit', array('id' => $user->user_id)) }}" class="btn btn-primary">Edit</a></li>
-        <li><a href="{{ route('user.delete', array('id' => $user->user_id)) }}" class="btn btn-warning">Delete</a></li>
+        <li><a href="{{ route('user.edit', $user->user_id) }}" class="btn btn-primary">Edit</a></li>
+        <li><a href="{{ route('user.delete', $user->user_id) }}" class="btn btn-warning">Delete</a></li>
     </ul>
 
     <ul class="two-column-bubble-list">

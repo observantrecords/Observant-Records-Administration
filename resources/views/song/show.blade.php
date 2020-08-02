@@ -21,8 +21,8 @@
 @section('content')
 
 <p>
-	<a href="{{ route('song.edit', array('id' => $song->song_id)) }}" class="btn btn-primary">Edit</a>
-	<a href="{{ route('song.delete', array('id' => $song->song_id)) }}" class="btn btn-warning">Delete</a>
+	<a href="{{ route('song.edit', $song->song_id) }}" class="btn btn-primary">Edit</a>
+	<a href="{{ route('song.delete', $song->song_id) }}" class="btn btn-warning">Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
@@ -77,9 +77,9 @@
 	@foreach ($song->recordings as $recording)
 	<li>
 		<div>
-			<a href="{{ route( 'recording.edit', array( 'id' => $recording->recording_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'recording.delete', array( 'id' => $recording->recording_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'recording.show', array( 'id' => $recording->recording_id ) ) }}">@if (empty($recording->recording_isrc_num)) (ISRC TBD) @else {{ $recording->recording_isrc_num }} @endif</a>
+			<a href="{{ route( 'recording.edit', $recording->recording_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route( 'recording.delete', $recording->recording_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+			<a href="{{ route( 'recording.show', $recording->recording_id ) }}">@if (empty($recording->recording_isrc_num)) (ISRC TBD) @else {{ $recording->recording_isrc_num }} @endif</a>
 		</div>
 	</li>
 	@endforeach
@@ -95,9 +95,9 @@
 	@foreach ($song->tracks as $track)
 	<li>
 		<div>
-			<a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<em><a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}">{{ $track->release->release_alias }}</a></em>
+			<a href="{{ route( 'track.edit', $track->track_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route( 'track.delete', $track->track_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+			<em><a href="{{ route( 'track.show', $track->track_id ) }}">{{ $track->release->release_alias }}</a></em>
 		</div>
 	</li>
 	@endforeach
