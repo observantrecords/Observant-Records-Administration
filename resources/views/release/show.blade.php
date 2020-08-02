@@ -232,7 +232,7 @@
 				<li><a href="{{ route( 'ecommerce.edit', $ecommerce->ecommerce_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
 				<li><a href="{{ route( 'ecommerce.delete', $ecommerce->ecommerce_id ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
 				<li>
-					<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', array('id' => $ecommerce->ecommerce_id) ) }}">{{ $ecommerce->ecommerce_label }}</a>
+					<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', $ecommerce->ecommerce_id) }}">{{ $ecommerce->ecommerce_label }}</a>
 					<input type="hidden" name="ecommerce_id" value="{{ $ecommerce->ecommerce_id }}" />
 				</li>
 			</ul>
