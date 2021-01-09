@@ -65,6 +65,14 @@
 </div>
 
 <div class="form-group">
+	{!! Form::label( 'album_order', 'Order:', array( 'class' => 'col-sm-2 control-label' ) ) !!}
+	<div class="col-sm-10">
+		{!! Form::text( 'album_order', $album->album_order, array( 'class' => 'form-control' ) ) !!}
+	</div>
+</div>
+
+
+<div class="form-group">
 	{!! Form::label( 'album_is_visible', 'Visibility:', array( 'class' => 'col-sm-2 control-label' ) ) !!}
 	<div class="col-sm-10">
 		<div class="radio">
