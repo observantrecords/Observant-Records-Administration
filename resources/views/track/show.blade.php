@@ -4,7 +4,7 @@
  &raquo; {{ $track->release->album->artist->artist_display_name }}
  &raquo; {{ $track->release->album->album_title }}
 @if (!empty($release->release_catalog_num)) &raquo; {{ $release->release_catalog_num }} @endif
- &raquo; {{ $track->song->song_title }}
+@if (!empty($track->track_display_title)) &raquo; {{ $track->track_display_title  }} @else &raquo; {{ $track->song->song_title }} @endif
 @stop
 
 @section('section_header')
@@ -19,7 +19,13 @@
 @section('section_label')
 <h3>
 	Track info
-	<small>{{ $track->song->song_title }}</small>
+	<small>
+		@if (!empty($track->track_display_title))
+			{{ $track->track_display_title }}
+		@else
+			{{ $track->song->song_title }}
+		@endif
+	</small>
 </h3>
 @stop
 
@@ -33,7 +39,12 @@
 <ul class="two-column-bubble-list">
 	<li>
 		<div>
-			<label>Title</label> {{ $track->song->song_title }}
+			<label>Title</label>
+			@if (!empty($track->track_display_title))
+				{{ $track->track_display_title }}
+			@else
+				{{ $track->song->song_title }}
+			@endif
 		</div>
 	</li>
 	<li>
@@ -52,6 +63,13 @@
 			<label>Alias</label> {{ $track->track_alias }}
 		</div>
 	</li>
+	@endif
+	@if (!empty($track->track_artist_id))
+		<li>
+			<div>
+				<label>Artist</label> {{ $track->artist->artist_display_name }}
+			</div>
+		</li>
 	@endif
 	<li>
 		<div>

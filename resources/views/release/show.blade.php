@@ -125,7 +125,17 @@
 						<li><a href="{{ route( 'track.edit', $track->track_id ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a></li>
 						<li><a href="{{ route( 'track.delete', $track->track_id ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a></li>
 						<li>
-							<span class="track-num-display">{{ $track->track_track_num }}</span>. <a href="{{ route( 'track.show',$track->track_id ) }}">{{ $track->song->song_title }}</a>
+							<span class="track-num-display">{{ $track->track_track_num }}</span>.
+							<a href="{{ route( 'track.show',$track->track_id ) }}">
+								@if ( $track->track_artist_id )
+									{{ $track->artist->artist_display_name }} &ndash;
+								@endif
+								@if ( $track->track_display_title)
+									{{ $track->track_display_title }}
+								@else
+									{{ $track->song->song_title }}
+								@endif
+							</a>
 							<input type="hidden" name="track_id" value="{{ $track->track_id }}" />
 							<input type="hidden" name="track_disc_num" value="{{ $track->track_disc_num }}" />
 						</li>

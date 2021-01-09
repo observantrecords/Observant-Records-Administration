@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Release;
 use App\Models\Track;
 use App\Models\Song;
@@ -71,6 +72,7 @@ class TrackController extends Controller {
 			$track->track_track_num = empty($last_track_num) ? 1 : $last_track_num + 1;
 		}
 
+		$artists = $this->build_artist_options();
 
 		$songs = $this->build_song_options($track);
 
@@ -80,6 +82,7 @@ class TrackController extends Controller {
 
 		$method_variables = array(
 			'track' => $track,
+			'artists' => $artists,
 			'songs' => $songs,
 			'recordings' => $recordings,
 			'releases' => $releases,
@@ -142,6 +145,8 @@ class TrackController extends Controller {
 	 */
 	public function edit($id)
 	{
+	    $artists = $this->build_artist_options();
+
 		$songs = $this->build_song_options($id);
 
 		$recordings = $this->build_recording_options($id);
@@ -150,6 +155,7 @@ class TrackController extends Controller {
 
 		$method_variables = array(
 			'track' => $id,
+			'artists' => $artists,
 			'songs' => $songs,
 			'recordings' => $recordings,
 			'releases' => $releases,
@@ -246,13 +252,17 @@ class TrackController extends Controller {
 		return $track->save();
 	}
 
+    private function build_artist_options() {
+
+	    $artists = Artist::orderBy('artist_display_name')->pluck('artist_display_name', 'artist_id');
+
+        $artists = array(0 => '&nbsp;') + $artists->toArray();
+        return $artists;
+    }
+
 	private function build_song_options($track) {
 
-		if (!empty($track->release->album->artist->artist_id)) {
-			$songs = Song::where('song_primary_artist_id', $track->release->album->artist->artist_id)->orderBy('song_title')->pluck('song_title', 'song_id');
-		} else {
-			$songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
-		}
+        $songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
 
 		$songs = array(0 => '&nbsp;') + $songs->toArray();
 		return $songs;
@@ -260,11 +270,7 @@ class TrackController extends Controller {
 
 	private function build_recording_options($track) {
 
-		if (!empty($track->release->album->artist->artist_id)) {
-			$recording_songs = Recording::with('song')->where('recording_artist_id', $track->release->album->artist->artist_id)->orderBy('recording_isrc_num')->get();
-		} else {
-			$recording_songs = Recording::with('song')->orderBy('recording_isrc_num')->get();
-		}
+        $recording_songs = Recording::with('song')->orderBy('recording_isrc_num')->get();
 
 		$recordings = $recording_songs->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {
