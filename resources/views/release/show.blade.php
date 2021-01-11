@@ -130,11 +130,7 @@
 								@if ( $track->track_artist_id )
 									{{ $track->artist->artist_display_name }} &ndash;
 								@endif
-								@if ( $track->track_display_title)
-									{{ $track->track_display_title }}
-								@else
-									{{ $track->song->song_title }}
-								@endif
+								{{ $track->track_title }}
 							</a>
 							<input type="hidden" name="track_id" value="{{ $track->track_id }}" />
 							<input type="hidden" name="track_disc_num" value="{{ $track->track_disc_num }}" />

@@ -28,7 +28,7 @@
 		<div>
 			<a href="{{ route( 'track.edit', $track->track_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
 			<a href="{{ route( 'track.delete', $track->track_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'track.show', $track->track_id ) }}">{{ $track->song->song_title }}</a>
+			<a href="{{ route( 'track.show', $track->track_id ) }}">{{ $track->track_title }}</a>
 		</div>
 	</li>
 	@endforeach
