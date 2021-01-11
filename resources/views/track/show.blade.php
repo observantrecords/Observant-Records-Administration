@@ -4,7 +4,7 @@
  &raquo; {{ $track->release->album->artist->artist_display_name }}
  &raquo; {{ $track->release->album->album_title }}
 @if (!empty($release->release_catalog_num)) &raquo; {{ $release->release_catalog_num }} @endif
-@if (!empty($track->track_display_title)) &raquo; {{ $track->track_display_title  }} @else &raquo; {{ $track->song->song_title }} @endif
+ &raquo; {{ $track->track_title }}
 @stop
 
 @section('section_header')
@@ -20,11 +20,7 @@
 <h3>
 	Track info
 	<small>
-		@if (!empty($track->track_display_title))
-			{{ $track->track_display_title }}
-		@else
-			{{ $track->song->song_title }}
-		@endif
+		{{ $track->track_title }}
 	</small>
 </h3>
 @stop
@@ -40,11 +36,7 @@
 	<li>
 		<div>
 			<label>Title</label>
-			@if (!empty($track->track_display_title))
-				{{ $track->track_display_title }}
-			@else
-				{{ $track->song->song_title }}
-			@endif
+			{{ $track->track_title }}
 		</div>
 	</li>
 	<li>

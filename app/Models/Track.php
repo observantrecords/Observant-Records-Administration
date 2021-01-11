@@ -66,4 +66,18 @@ class Track extends Model {
 
 		return $tracks_formatted;
 	}
+
+    public function getTrackTitleAttribute() {
+	    $track_title = null;
+
+	    if (empty($this->attributes['track_title'])) {
+	        $track_title = (!empty($this->attributes['track_display_title'])) ?
+                $this->attributes['track_display_title'] :
+                $this->song->song_title;
+        } else {
+	        $track_title = $this->attributes['track_title'];
+        }
+
+	    return $track_title;
+    }
 }
