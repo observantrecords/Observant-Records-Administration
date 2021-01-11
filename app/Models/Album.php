@@ -21,6 +21,7 @@ class Album extends Model {
 		'album_format_id',
 		'album_ctype_locale',
 		'album_title',
+		'album_order',
 		'album_alias',
 		'album_image',
 		'album_music_description',

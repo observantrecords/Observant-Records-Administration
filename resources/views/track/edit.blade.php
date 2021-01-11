@@ -4,7 +4,7 @@
  &raquo; {{ $track->release->album->artist->artist_display_name }}
  &raquo; {{ $track->release->album->album_title }}
 @if (!empty($release->release_catalog_num)) &raquo; {{ $release->release_catalog_num }} @endif
- &raquo; {{ $track->song->song_title }}
+ &raquo; {{ $track->track_title  }}
  &raquo; Edit
 @stop
 
@@ -20,7 +20,9 @@
 @section('section_label')
 <h3>
 	Edit
-	<small>{{ $track->song->song_title }}</small>
+	<small>
+		{{ $track->track_title }}
+	</small>
 </h3>
 @stop
 
@@ -37,7 +39,9 @@
 </p>
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route('track.show', $track->track_id ) }}/">Back to <em>{{ $track->song->song_title }}</em></a></li>
+	<li>&laquo; <a href="{{ route('track.show', $track->track_id ) }}/">Back to <em>
+				{{ $track->track_title }}
+			</em></a></li>
 	<li>&laquo; <a href="{{ route('release.show', $track->release->release_id ) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @else (TBD) @endif</a></li>
 </ul>
 @endif

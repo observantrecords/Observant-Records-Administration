@@ -19,8 +19,10 @@ class Track extends Model {
 		'track_song_id',
 		'track_release_id',
 		'track_recording_id',
+		'track_artist_id',
 		'track_disc_num',
 		'track_track_num',
+		'track_display_title',
 		'track_alias',
 		'track_is_visible',
 		'track_audio_is_linked',
@@ -40,7 +42,11 @@ class Track extends Model {
 		return $this->hasOne('App\Models\Song', 'song_id', 'track_song_id');
 	}
 
-	public function recording() {
+    public function artist() {
+        return $this->hasOne('App\Models\Artist', 'artist_id', 'track_artist_id');
+    }
+
+    public function recording() {
 		return $this->hasOne('App\Models\Recording', 'recording_id', 'track_recording_id');
 	}
 
@@ -60,4 +66,18 @@ class Track extends Model {
 
 		return $tracks_formatted;
 	}
+
+    public function getTrackTitleAttribute() {
+	    $track_title = null;
+
+	    if (empty($this->attributes['track_title'])) {
+	        $track_title = (!empty($this->attributes['track_display_title'])) ?
+                $this->attributes['track_display_title'] :
+                $this->song->song_title;
+        } else {
+	        $track_title = $this->attributes['track_title'];
+        }
+
+	    return $track_title;
+    }
 }
