@@ -106,14 +106,22 @@
 			</div>
 		</td>
 		<td>
-			<a href="{{ route( 'release.show', $release->release_id ) }}"><img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $release->album->artist->artist_alias }}/albums/{{ $release->album->album_alias }}/{{ strtolower($release->release_catalog_num) }}/images/cover_front_small.jpg" width="50" height="50" /></a>
+			<a href="{{ route( 'release.show', $release->release_id ) }}">
+				@if (!empty($release->get_cdn_image() ))
+				<img src="{{ $release->get_cdn_image('small') }}" width="50" height="50" />
+				@else
+				No cover uploaded
+				@endif
+			</a>
 		</td>
 		<td>
+			<a href="{{ route( 'release.show', $release->release_id ) }}">
 			@if (!empty($release->release_catalog_num))
 			{{ $release->release_catalog_num }}
 			@else
 			Unassigned
 			@endif
+			</a>
 		</td>
 		<td>
 			@if (!empty($release->release_upc_num))
