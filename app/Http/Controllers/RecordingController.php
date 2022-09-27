@@ -39,7 +39,7 @@ class RecordingController extends Controller {
 		$recording_list = $recordings->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recording_list as $r => $recording) {
 			$song_title = (!empty($recordings->find($r)->song->song_title)) ? $recordings->find($r)->song->song_title : 'TBD';
-			$recording_list[$r] = $recording . ' ('. $song_title . ')';
+			$recording_list[$r] = $song_title . ' ('. $recording . ')';
 		}
 		$recording_list = array(0 => '&nbsp;') + $recording_list->toArray();
 

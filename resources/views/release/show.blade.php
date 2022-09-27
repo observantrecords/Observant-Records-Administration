@@ -304,9 +304,11 @@
 @stop
 
 @section('sidebar')
-<p>
-	<img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $release->album->artist->artist_alias }}/albums/{{ $release->album->album_alias }}/{{ strtolower($release->release_catalog_num) }}/images/cover_front_medium.jpg" width="230" />
-</p>
+	@if (!empty($release->get_cdn_image() ))
+	<p>
+		<img src="{{ $release->get_cdn_image('medium') }}" width="230" />
+	</p>
+	@endif
 
 <ul class="list-unstyled">
 	<li>&laquo; <a href="{{ route('album.show', $release->release_album_id ) }}/">Back to <em>{{ $release->album->album_title }}</em></a></li>

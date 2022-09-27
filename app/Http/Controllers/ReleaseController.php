@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Release;
 use App\Models\ReleaseFormat;
 use App\Models\Track;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
@@ -21,7 +22,7 @@ class ReleaseController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index()
 	{
@@ -46,7 +47,7 @@ class ReleaseController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 *
-	 * @return Response
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function create()
 	{
@@ -81,7 +82,7 @@ class ReleaseController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @return Response
+	 * @return RedirectResponse
 	 */
 	public function store()
 	{
@@ -106,8 +107,8 @@ class ReleaseController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Release  $id
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function show($id)
 	{
@@ -129,8 +130,8 @@ class ReleaseController extends Controller {
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Release  $id
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function edit($id)
 	{
@@ -152,8 +153,8 @@ class ReleaseController extends Controller {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Release  $id
+	 * @return RedirectResponse
 	 */
 	public function update($id)
 	{
@@ -188,8 +189,8 @@ class ReleaseController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Release  $id
+	 * @return RedirectResponse
 	 */
 	public function destroy($id)
 	{
