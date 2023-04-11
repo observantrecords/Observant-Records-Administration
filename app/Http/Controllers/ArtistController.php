@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use App\Models\Song;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class ArtistController extends Controller {
@@ -66,13 +66,13 @@ class ArtistController extends Controller {
 		$fields = $artist->getFillable();
 
 		foreach ($fields as $field) {
-			$artist->{$field} = Input::get($field);
+			$artist->{$field} = Request::get($field);
 		}
 
 		$result = $artist->save();
 
 		if ($result !== false) {
-			return Redirect::route('artist.show', array('id' => $artist->artist_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('artist.show', $artist->artist_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('artist.index')->with('error', 'Your changes were not saved.');
 		}
@@ -127,13 +127,13 @@ class ArtistController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('artist.show', array('id' => $id->artist_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('artist.show', $id->artist_id)->with('message', 'Your changes were saved.');
 		} else {
 			return Redirect::route('artist.index')->with('error', 'Your changes were not saved.');
 		}
@@ -165,7 +165,7 @@ class ArtistController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$artist_display_name = $id->artist_display_name;
 
 		if ($confirm === true) {
@@ -216,7 +216,7 @@ class ArtistController extends Controller {
 
 			return Redirect::route('artist.index')->with('message', $artist_display_name . ' was deleted.');
 		} else {
-			return Redirect::route('artist.show', array('id' => $id->artist_id))->with('error', $artist_display_name . ' was not deleted.');
+			return Redirect::route('artist.show', $id->artist_id)->with('error', $artist_display_name . ' was not deleted.');
 		}
 	}
 

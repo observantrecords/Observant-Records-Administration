@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Release;
 use App\Models\Track;
 use App\Models\Song;
 use App\Models\Recording;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class TrackController extends Controller {
@@ -25,7 +26,7 @@ class TrackController extends Controller {
 	 */
 	public function index()
 	{
-		$release_id = Input::get('release');
+		$release_id = Request::get('release');
 
 		if (!empty($release_id)) {
 			$tracks = Track::where('track_release_id', $release_id)->orderBy('track_disc_num')->orderBy('track_track_num')->get();
@@ -53,7 +54,7 @@ class TrackController extends Controller {
 	{
 		$track = new Track;
 
-		$release_id = Input::get('release');
+		$release_id = Request::get('release');
 
 		if (!empty($release_id)) {
 			$release = Release::find($release_id);
@@ -71,6 +72,7 @@ class TrackController extends Controller {
 			$track->track_track_num = empty($last_track_num) ? 1 : $last_track_num + 1;
 		}
 
+		$artists = $this->build_artist_options();
 
 		$songs = $this->build_song_options($track);
 
@@ -80,6 +82,7 @@ class TrackController extends Controller {
 
 		$method_variables = array(
 			'track' => $track,
+			'artists' => $artists,
 			'songs' => $songs,
 			'recordings' => $recordings,
 			'releases' => $releases,
@@ -103,15 +106,15 @@ class TrackController extends Controller {
 		$fields = $track->getFillable();
 
 		foreach ($fields as $field) {
-			$track->{$field} = Input::get($field);
+			$track->{$field} = Request::get($field);
 		}
 
 		$result = $track->save();
 
 		if ($result !== false) {
-			return Redirect::route('track.show', array('id' => $track->track_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('track.show', $track->track_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $track->track_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $track->track_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -142,6 +145,8 @@ class TrackController extends Controller {
 	 */
 	public function edit($id)
 	{
+	    $artists = $this->build_artist_options();
+
 		$songs = $this->build_song_options($id);
 
 		$recordings = $this->build_recording_options($id);
@@ -150,6 +155,7 @@ class TrackController extends Controller {
 
 		$method_variables = array(
 			'track' => $id,
+			'artists' => $artists,
 			'songs' => $songs,
 			'recordings' => $recordings,
 			'releases' => $releases,
@@ -172,15 +178,15 @@ class TrackController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('track.show', array('id' => $id->track_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('track.show', $id->track_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('release.show', array('id' => $id->track_release_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('release.show', $id->track_release_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -204,7 +210,7 @@ class TrackController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$track_song_title = $id->song->song_title;
 		$release_id = $id->track_release_id;
 
@@ -214,14 +220,14 @@ class TrackController extends Controller {
 
 			// Remove track.
 			$id->delete();
-			return Redirect::route('release.show', array('id' => $id->track_release_id  ))->with('message', $track_song_title . ' was deleted.');
+			return Redirect::route('release.show', $id->track_release_id  )->with('message', $track_song_title . ' was deleted.');
 		} else {
-			return Redirect::route('track.show', array('id' => $id->track_id))->with('error', $track_song_title . ' was not deleted.');
+			return Redirect::route('track.show', $id->track_id)->with('error', $track_song_title . ' was not deleted.');
 		}
 	}
 
 	public function save_order() {
-		$tracks = Input::get('tracks');
+		$tracks = Request::get('tracks');
 
 		$is_success = true;
 		if (count($tracks) > 0) {
@@ -246,13 +252,17 @@ class TrackController extends Controller {
 		return $track->save();
 	}
 
+    private function build_artist_options() {
+
+	    $artists = Artist::orderBy('artist_display_name')->pluck('artist_display_name', 'artist_id');
+
+        $artists = array(0 => '&nbsp;') + $artists->toArray();
+        return $artists;
+    }
+
 	private function build_song_options($track) {
 
-		if (!empty($track->release->album->artist->artist_id)) {
-			$songs = Song::where('song_primary_artist_id', $track->release->album->artist->artist_id)->orderBy('song_title')->pluck('song_title', 'song_id');
-		} else {
-			$songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
-		}
+        $songs = Song::orderBy('song_title')->pluck('song_title', 'song_id');
 
 		$songs = array(0 => '&nbsp;') + $songs->toArray();
 		return $songs;
@@ -260,11 +270,7 @@ class TrackController extends Controller {
 
 	private function build_recording_options($track) {
 
-		if (!empty($track->release->album->artist->artist_id)) {
-			$recording_songs = Recording::with('song')->where('recording_artist_id', $track->release->album->artist->artist_id)->orderBy('recording_isrc_num')->get();
-		} else {
-			$recording_songs = Recording::with('song')->orderBy('recording_isrc_num')->get();
-		}
+        $recording_songs = Recording::with('song')->orderBy('recording_isrc_num')->get();
 
 		$recordings = $recording_songs->pluck('recording_isrc_num', 'recording_id');
 		foreach ($recordings as $r => $recording) {

@@ -84,9 +84,9 @@
         <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
         <li>
             @if (!empty( $song->song_id))
-                <a href="{{ route( 'song.show', array( 'id' => $song->song_id ) ) }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route( 'song.show', $song->song_id ) }}" class="btn btn-default">Cancel</a>
             @elseif (!empty($song->song_primary_artist_id))
-                <a href="{{ route( 'artist.show', array( 'id' => $song->song_primary_artist_id ) ) }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route( 'artist.show', $song->song_primary_artist_id ) }}" class="btn btn-default">Cancel</a>
             @else
                 <a href="{{ route( 'song.index' ) }}" class="btn btn-default">Cancel</a>
             @endif

@@ -65,6 +65,14 @@
 </div>
 
 <div class="form-group">
+	{!! Form::label( 'album_order', 'Order:', array( 'class' => 'col-sm-2 control-label' ) ) !!}
+	<div class="col-sm-10">
+		{!! Form::text( 'album_order', $album->album_order, array( 'class' => 'form-control' ) ) !!}
+	</div>
+</div>
+
+
+<div class="form-group">
 	{!! Form::label( 'album_is_visible', 'Visibility:', array( 'class' => 'col-sm-2 control-label' ) ) !!}
 	<div class="col-sm-10">
 		<div class="radio">
@@ -86,9 +94,9 @@
             <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
             <li>
                 @if (!empty( $album->album_id))
-                    <a href="{{ route( 'album.show', array( 'id' => $album->album_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'album.show', $album->album_id ) }}" class="btn btn-default">Cancel</a>
                 @elseif (!empty($album->album_artist_id))
-                    <a href="{{ route( 'artist.show', array( 'id' => $album->album_artist_id ) ) }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ route( 'artist.show', $album->album_artist_id ) }}" class="btn btn-default">Cancel</a>
                 @else
                     <a href="{{ route( 'album.index' ) }}" class="btn btn-default">Cancel</a>
                 @endif

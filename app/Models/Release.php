@@ -73,6 +73,17 @@ class Release extends Model {
 		return $catalog_num;
 	}
 
+	public function get_cdn_image($size = '') {
+        $catalog_num = strtolower($this->release_catalog_num);
+        $cdn = 'https:' . OBSERVANTRECORDS_CDN_BASE_URI;
+        $_size = (!empty($size)) ? '_' . $size : null;
+        $release_image = <<< RELEASE_IMAGE
+{$cdn}/artists/{$this->album->artist->artist_alias }/albums/{$this->album->album_alias}/{$catalog_num}/images/cover_front{$_size}.jpg
+RELEASE_IMAGE;
+        $image_check = get_headers($release_image, true);
+        return (strstr($image_check[0], '200') !== false) ? $release_image : null;
+    }
+
 	private function _retrieve_last_number() {
 		$result = DB::table($this->table)->where('release_catalog_num', 'LIKE', 'OBRC-%B')->orderBy('release_catalog_num', 'desc')->first();
 		return $result;

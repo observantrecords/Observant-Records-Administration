@@ -4,7 +4,7 @@
  &raquo; {{ $track->release->album->artist->artist_display_name }}
  &raquo; {{ $track->release->album->album_title }}
 @if (!empty($release->release_catalog_num)) &raquo; {{ $release->release_catalog_num }} @endif
- &raquo; {{ $track->song->song_title }}
+ &raquo; {{ $track->track_title }}
 @stop
 
 @section('section_header')
@@ -19,21 +19,24 @@
 @section('section_label')
 <h3>
 	Track info
-	<small>{{ $track->song->song_title }}</small>
+	<small>
+		{{ $track->track_title }}
+	</small>
 </h3>
 @stop
 
 @section('content')
 
 <p>
-	<a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}" class="btn btn-primary">Edit</a>
-	<a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}" class="btn btn-default">Delete</a>
+	<a href="{{ route( 'track.edit', $track->track_id ) }}" class="btn btn-primary">Edit</a>
+	<a href="{{ route( 'track.delete', $track->track_id ) }}" class="btn btn-default">Delete</a>
 </p>
 
 <ul class="two-column-bubble-list">
 	<li>
 		<div>
-			<label>Title</label> {{ $track->song->song_title }}
+			<label>Title</label>
+			{{ $track->track_title }}
 		</div>
 	</li>
 	<li>
@@ -52,6 +55,13 @@
 			<label>Alias</label> {{ $track->track_alias }}
 		</div>
 	</li>
+	@endif
+	@if (!empty($track->track_artist_id))
+		<li>
+			<div>
+				<label>Artist</label> {{ $track->artist->artist_display_name }}
+			</div>
+		</li>
 	@endif
 	<li>
 		<div>
@@ -72,7 +82,7 @@
 		<div>
 			<label>Recording</label>
 			@if (!empty($track->track_recording_id))
-			<a href=" {{ route('recording.show', array( 'id' => $track->track_recording_id ) ) }}/">
+			<a href=" {{ route('recording.show', $track->track_recording_id ) }}/">
 				@if (empty($track->recording->recording_isrc_num))
 				(No ISRC number set) {{ $track->song->song_title }}
 				@else
@@ -95,12 +105,14 @@
 @stop
 
 @section('sidebar')
-<p>
-	<img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $track->release->album->artist->artist_alias }}/albums/{{ $track->release->album->album_alias }}/{{ strtolower($track->release->release_catalog_num) }}/images/cover_front_medium.jpg" width="230" />
-</p>
+	@if (!empty($track->release->get_cdn_image() ))
+		<p>
+			<img src="{{ $track->release->get_cdn_image('medium') }}" width="230" />
+		</p>
+	@endif
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route('release.show', array( 'id' => $track->track_release_id )) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @endif</a></li>
+	<li>&laquo; <a href="{{ route('release.show', $track->track_release_id ) }}/">Back to <em>{{ $track->release->album->album_title }}</em> @if (!empty($track->release->release_catalog_num)) ({{ $track->release->release_catalog_num }}) @endif</a></li>
 </ul>
 
 @stop

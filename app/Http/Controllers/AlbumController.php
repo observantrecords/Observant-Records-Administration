@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Artist;
 use App\Models\Album;
 use App\Models\AlbumFormat;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\View;
 
 class AlbumController extends Controller {
@@ -29,11 +30,11 @@ class AlbumController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function index()
 	{
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 		if (!empty($artist_id)) {
 			$albums = Album::where('album_artist_id', $artist_id)->orderBy('album_title')->get();
 		} else {
@@ -54,11 +55,11 @@ class AlbumController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 *
-	 * @return Response
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function create()
 	{
-		$artist_id = Input::get('artist');
+		$artist_id = Request::get('artist');
 
 		$album = new Album;
 		$album->album_release_date = date('Y-m-d');
@@ -84,7 +85,7 @@ class AlbumController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @return Response
+	 * @return RedirectResponse
 	 */
 	public function store()
 	{
@@ -93,15 +94,15 @@ class AlbumController extends Controller {
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('album.show', array('id' => $id->album_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('album.show', $id->album_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('artist.show', array('id' => $id->album_artist_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('artist.show', $id->album_artist_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -109,8 +110,8 @@ class AlbumController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param  Album  $id
+	 * @return \Illuminate\Contracts\View\View
 	 */
 	public function show($id)
 	{
@@ -128,7 +129,7 @@ class AlbumController extends Controller {
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
-	 * @return Response
+     * @return \Illuminate\Contracts\View\View
 	 */
 	public function edit($id)
 	{
@@ -151,22 +152,22 @@ class AlbumController extends Controller {
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
-	 * @return Response
+	 * @return RedirectResponse
 	 */
 	public function update($id)
 	{
 		$fields = $id->getFillable();
 
 		foreach ($fields as $field) {
-			$id->{$field} = Input::get($field);
+			$id->{$field} = Request::get($field);
 		}
 
 		$result = $id->save();
 
 		if ($result !== false) {
-			return Redirect::route('album.show', array('id' => $id->album_id))->with('message', 'Your changes were saved.');
+			return Redirect::route('album.show', $id->album_id)->with('message', 'Your changes were saved.');
 		} else {
-			return Redirect::route('artist.show', array('id' => $id->album_artist_id))->with('error', 'Your changes were not saved.');
+			return Redirect::route('artist.show', $id->album_artist_id)->with('error', 'Your changes were not saved.');
 		}
 	}
 
@@ -186,11 +187,11 @@ class AlbumController extends Controller {
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
-	 * @return Response
+	 * @return RedirectResponse
 	 */
 	public function destroy($id)
 	{
-		$confirm = (boolean) Input::get('confirm');
+		$confirm = (boolean) Request::get('confirm');
 		$album_title = $id->album_title;
 		$artist_id = $id->album_artist_id;
 
@@ -217,14 +218,14 @@ class AlbumController extends Controller {
 
 			// Remove album.
 			$id->delete();
-			return Redirect::route('artist.show', array('id' => $artist_id  ))->with('message', $album_title . ' was deleted.');
+			return Redirect::route('artist.show', $artist_id )->with('message', $album_title . ' was deleted.');
 		} else {
-			return Redirect::route('album.show', array('id' => $id->album_id))->with('error', $album_title . ' was not deleted.');
+			return Redirect::route('album.show', $id->album_id)->with('error', $album_title . ' was not deleted.');
 		}
 	}
 
 	public function save_order() {
-		$albums = Input::get('albums');
+		$albums = Request::get('albums');
 
 		$is_success = true;
 		if (count($albums) > 0) {

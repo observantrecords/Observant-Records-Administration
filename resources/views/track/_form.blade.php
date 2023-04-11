@@ -31,6 +31,20 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label( 'track_artist_id', 'Artist:', array( 'class' => 'col-sm-2' ) ) !!}
+		<div class="col-sm-10">
+			{!! Form::select( 'track_artist_id', $artists, $track->track_artist_id, array( 'class' => 'form-control' ) ) !!}
+		</div>
+	</div>
+
+	<div class="form-group">
+		{!! Form::label( 'track_display_title', 'Display title:', array( 'class' => 'col-sm-2' ) ) !!}
+		<div class="col-sm-10">
+			{!! Form::text( 'track_display_title', $track->track_display_title, array( 'class' => 'form-control' ) ) !!}
+		</div>
+	</div>
+
+	<div class="form-group">
 		{!! Form::label( 'track_alias', 'Alias:', array( 'class' => 'col-sm-2' ) ) !!}
 		<div class="col-sm-10">
 			{!! Form::text( 'track_alias', $track->track_alias, array( 'class' => 'form-control' ) ) !!}
@@ -98,9 +112,9 @@
                 <li>{!! Form::submit( 'Save', array( 'class' => 'btn btn-primary' ) ) !!}</li>
                 <li>
                     @if (!empty( $track->track_id))
-                        <a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route( 'track.show', $track->track_id ) }}" class="btn btn-default">Cancel</a>
                     @elseif (!empty($track->track_release_id))
-                        <a href="{{ route( 'release.show', array( 'id' => $track->track_release_id ) ) }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route( 'release.show', $track->track_release_id ) }}" class="btn btn-default">Cancel</a>
                     @else
                         <a href="{{ route( 'track.index' ) }}" class="btn btn-default">Cancel</a>
                     @endif
@@ -112,6 +126,7 @@
 <script type="text/javascript">
 	(function ($) {
 		$('#track_song_id').chosen();
+		$('#track_artist_id').chosen();
 		$('#track_recording_id').chosen();
 		$('#track_release_id').chosen();
 

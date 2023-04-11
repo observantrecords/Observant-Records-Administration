@@ -24,9 +24,9 @@
 	@foreach ($ecommerce as $ecommerce_link)
 	<li>
 		<div>
-			<a href="{{ route( 'ecommerce.edit', array( 'id' => $ecommerce_link->ecommerce_id ) ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a href="{{ route( 'ecommerce.delete', array( 'id' => $ecommerce_link->ecommerce_id ) ) }}"><span class="glyphicon glyphicon-remove"></span></a>
-			<a href="{{ route( 'ecommerce.show', array( 'id' => $ecommerce_link->ecommerce_id ) ) }}">{{ $ecommerce_link->ecommerce_label }}</a>
+			<a href="{{ route( 'ecommerce.edit', $ecommerce_link->ecommerce_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="{{ route( 'ecommerce.delete', $ecommerce_link->ecommerce_id ) }}"><span class="glyphicon glyphicon-remove"></span></a>
+			<a href="{{ route( 'ecommerce.show', $ecommerce_link->ecommerce_id ) }}">{{ $ecommerce_link->ecommerce_label }}</a>
 			@if (!empty($ecommerce_link->release->album->album_title))
 			({{ $ecommerce_link->release->album->album_title }})
 			@elseif (!empty($ecommerce_link->track->song->song_title))

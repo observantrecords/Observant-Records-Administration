@@ -29,8 +29,8 @@
 @section('content')
 
 <ul class="list-inline">
-	<li><a href="{{ route( 'release.edit', array( 'id' => $release->release_id ) ) }}" class="btn btn-primary">Edit</a></li>
-	<li><a href="{{ route( 'release.delete', array( 'id' => $release->release_id ) ) }}" class="btn btn-warning">Delete</a></li>
+	<li><a href="{{ route( 'release.edit', $release->release_id ) }}" class="btn btn-primary">Edit</a></li>
+	<li><a href="{{ route( 'release.delete', $release->release_id ) }}" class="btn btn-warning">Delete</a></li>
 </ul>
 
 <ul class="two-column-bubble-list">
@@ -101,7 +101,7 @@
 <ul class="list-inline">
 	<li><a href="{{ route( 'track.create', array('release' => $release->release_id) ) }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add a track</a></li>
 	@if (count($release->release_track_list) > 0)
-	<li><a href="{{ route( 'release.export-id3' , array('id' => $release->release_id)  ) }}" class="btn btn-default">Export ID3 data</a></li>
+	<li><a href="{{ route( 'release.export-id3' , $release->release_id ) }}" class="btn btn-default">Export ID3 data</a></li>
 	<li>
 		{!! Form::button( 'Save track order', array('id' => 'save-order', 'class' => 'btn btn-default') ) !!}
 		{!! Form::hidden( 'track_id' ) !!}
@@ -122,10 +122,16 @@
 			<li>
 				<div>
 					<ul class="list-inline">
-						<li><a href="{{ route( 'track.edit', array( 'id' => $track->track_id ) ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a></li>
-						<li><a href="{{ route( 'track.delete', array( 'id' => $track->track_id ) ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a></li>
+						<li><a href="{{ route( 'track.edit', $track->track_id ) }}" title="[Edit]"><span class="glyphicon glyphicon-pencil"></span></a></li>
+						<li><a href="{{ route( 'track.delete', $track->track_id ) }}" title="[Delete]"><span class="glyphicon glyphicon-remove"></span></a></li>
 						<li>
-							<span class="track-num-display">{{ $track->track_track_num }}</span>. <a href="{{ route( 'track.show', array( 'id' => $track->track_id ) ) }}">{{ $track->song->song_title }}</a>
+							<span class="track-num-display">{{ $track->track_track_num }}</span>.
+							<a href="{{ route( 'track.show',$track->track_id ) }}">
+								@if ( $track->track_artist_id )
+									{{ $track->artist->artist_display_name }} &ndash;
+								@endif
+								{{ $track->track_title }}
+							</a>
 							<input type="hidden" name="track_id" value="{{ $track->track_id }}" />
 							<input type="hidden" name="track_disc_num" value="{{ $track->track_disc_num }}" />
 						</li>
@@ -229,10 +235,10 @@
 	<li>
 		<div>
 			<ul class="list-inline">
-				<li><a href="{{ route( 'ecommerce.edit', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
-				<li><a href="{{ route( 'ecommerce.delete', array('id' => $ecommerce->ecommerce_id) ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
+				<li><a href="{{ route( 'ecommerce.edit', $ecommerce->ecommerce_id ) }}"><span class="glyphicon glyphicon-pencil"></span></a></li>
+				<li><a href="{{ route( 'ecommerce.delete', $ecommerce->ecommerce_id ) }}"><span class="glyphicon glyphicon-remove"></span></a></li>
 				<li>
-					<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', array('id' => $ecommerce->ecommerce_id) ) }}">{{ $ecommerce->ecommerce_label }}</a>
+					<span class="ecommerce-list-order">{{ $ecommerce->ecommerce_list_order }}</span>. <a href="{{ route( 'ecommerce.show', $ecommerce->ecommerce_id) }}">{{ $ecommerce->ecommerce_label }}</a>
 					<input type="hidden" name="ecommerce_id" value="{{ $ecommerce->ecommerce_id }}" />
 				</li>
 			</ul>
@@ -298,12 +304,14 @@
 @stop
 
 @section('sidebar')
-<p>
-	<img src="{{ OBSERVANTRECORDS_CDN_BASE_URI }}/artists/{{ $release->album->artist->artist_alias }}/albums/{{ $release->album->album_alias }}/{{ strtolower($release->release_catalog_num) }}/images/cover_front_medium.jpg" width="230" />
-</p>
+	@if (!empty($release->get_cdn_image() ))
+	<p>
+		<img src="{{ $release->get_cdn_image('medium') }}" width="230" />
+	</p>
+	@endif
 
 <ul class="list-unstyled">
-	<li>&laquo; <a href="{{ route('album.show', array( 'id' => $release->release_album_id )) }}/">Back to <em>{{ $release->album->album_title }}</em></a></li>
+	<li>&laquo; <a href="{{ route('album.show', $release->release_album_id ) }}/">Back to <em>{{ $release->album->album_title }}</em></a></li>
 </ul>
 
 @stop

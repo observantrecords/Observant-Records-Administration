@@ -35,7 +35,7 @@
 @section('sidebar')
 @if (!empty($release->release_album_id))
 <ul>
-	<li><a href="{{ route('album.show', array( 'id' => $release->release_album_id )) }}/">Back to <em>{{ $release->album->album_title }}</em></a></li>
+	<li><a href="{{ route('album.show', $release->release_album_id ) }}/">Back to <em>{{ $release->album->album_title }}</em></a></li>
 </ul>
 @endif
 @stop
