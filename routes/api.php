@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,11 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('v1')->group(function() {
+    Route::resource('artist', 'Api\ArtistController');
+    Route::resource('album', 'Api\AlbumController');
+    Route::resource('release', 'Api\ReleaseController');
+    Route::resource('track', 'Api\TrackController');
 });
