@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Album;
+use App\Models\AlbumFormat;
 use App\Models\Release;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -15,9 +16,13 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $artist_id = \Illuminate\Support\Facades\Request::get('artist');
-        if (!empty($artist_id)) {
-            $albums = Album::where('album_artist_id', $artist_id)->orderBy('album_title')->get();
+
+        $parameters = \Illuminate\Support\Facades\Request::collect()->filter(function ($value, $key) {
+            return (strpos($key, 'album_') === 0);
+        })->toArray();
+
+        if (!empty($parameters)) {
+            $albums = Album::where($parameters)->orderBy('album_title')->get();
         } else {
             $albums = Album::orderBy('album_title')->get();
         }
@@ -41,7 +46,8 @@ class AlbumController extends Controller
     {
         $album = json_decode($id);
 
-        $album->primary_release = Release::with(['tracks.song','format'])->where('release_album_id', $album->album_id)->get()->toArray();
+        $album->primary_release = Release::with(['ecommerce', 'tracks.song', 'format'])->where('release_id', $album->album_primary_release_id)->first();
+        $album->format = AlbumFormat::where('format_id', $album->album_format_id)->first();
 
         return Response::json($album);
     }

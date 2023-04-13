@@ -49,7 +49,7 @@ class Release extends Model {
 	}
 
 	public function ecommerce() {
-		return $this->hasMany('App\Models\Ecommerce', 'ecommerce_release_id', 'release_id');
+		return $this->hasMany('App\Models\Ecommerce', 'ecommerce_release_id', 'release_id')->orderBy('ecommerce_list_order');
 	}
 
 	public function generate_catalog_num() {

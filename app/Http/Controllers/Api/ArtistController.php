@@ -35,7 +35,18 @@ class ArtistController extends Controller
     {
         $artist = json_decode($id);
 
-        $artist->albums = Album::with(['primary_release.tracks.song','format'])->where('album_artist_id', $artist->artist_id)->get()->toArray();
+        $album_parameters = \Illuminate\Support\Facades\Request::collect()->filter(function ($value, $key) {
+            return (strpos($key, 'album_') === 0);
+        })->toArray();
+        $where = ['album_artist_id' => $artist->artist_id];
+        if (!empty($album_parameters)) {
+            $where = array_merge($where, $album_parameters);
+        }
+
+        $albums = Album::with(['primary_release.ecommerce', 'primary_release.tracks.song', 'format'])->where($where)->get();
+
+        $artist->artist_api_path = '/artist/' . $artist->artist_id;
+        $artist->albums = $albums->toArray();
 
         return Response::json($artist);
     }
