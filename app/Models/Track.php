@@ -56,7 +56,7 @@ class Track extends Model {
 
 	public function findReleaseTracks($release_id) {
 		$tracks_formatted = array();
-		$tracks = Track::where('track_release_id', $release_id)->orderBy('track_disc_num')->orderBy('track_track_num')->get();
+		$tracks = Track::with('song')->where('track_release_id', $release_id)->orderBy('track_disc_num')->orderBy('track_track_num')->get();
 
 		if (!empty($tracks)) {
 			foreach ($tracks as $track) {
