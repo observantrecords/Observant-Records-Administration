@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/', array( 'as' => 'index', 'uses' => 'ArtistController@index' ) );
 	Route::get('/home', array( 'as' => 'home', 'uses' => 'ArtistController@index' ) );
