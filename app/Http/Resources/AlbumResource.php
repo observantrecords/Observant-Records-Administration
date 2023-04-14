@@ -20,12 +20,15 @@ class AlbumResource extends JsonResource
             'title' => $this->album_title,
             'alias' => $this->album_alias,
             'order' => $this->album_order,
+            'release_date' => $this->album_release_date,
             'visible' => $this->album_is_visible,
             'format' => $this->format->format_alias,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
-            'primary_release' => new ReleaseResource($this->primary_release),
+            'artist' => $this->artist->artist_display_name,
+            'primary_release' => new ReleaseResource($this->whenLoaded('primary_release')),
+            'releases' => new ReleaseCollection($this->whenLoaded('releases')),
         ];
     }
 }
