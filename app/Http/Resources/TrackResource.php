@@ -21,6 +21,7 @@ class TrackResource extends JsonResource
             'track_num' => $this->track_track_num,
             'song_title' => $this->song->song_title,
             'alias' => $this->track_alias,
+            'visible' => $this->track_is_visible,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
