@@ -4,8 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\TrackResource;
-use App\Http\Resources\EcommerceResource;
 
 class ReleaseResource extends JsonResource
 {
@@ -27,11 +25,12 @@ class ReleaseResource extends JsonResource
             'label' => $this->release_label,
             'release_date' => $this->release_release_date,
             'visible' => $this->release_is_visible,
+            'album' => $this->album->album_title,
+            'tracks' => TrackResource::collection($this->whenLoaded('tracks')),
+            'ecommerce' => EcommerceResource::collection($this->whenLoaded('ecommerce')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
-            'tracks' => TrackResource::collection($this->tracks),
-            'ecommerce' => EcommerceResource::collection($this->ecommerce),
         ];
     }
 }

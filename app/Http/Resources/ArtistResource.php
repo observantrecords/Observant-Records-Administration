@@ -24,7 +24,7 @@ class ArtistResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
-            'albums' => AlbumResource::collection($this->albums),
+            'albums' => AlbumResource::collection($this->whenLoaded('albums')),
         ];
     }
 }
