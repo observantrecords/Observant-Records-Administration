@@ -51,33 +51,39 @@ Route::prefix('v1')->group(function() {
     } );
     Route::get('/artist/{id}/albums', function (string $id, Request $request) {
 
-        $album = new Album();
-
-        if ($request->hasAny(['orderBy', 'order', 'visible', 'format'])) {
+        $where = [
+            'album_artist_id' => $id,
+        ];
+        if ($request->hasAny(['orderBy', 'order', 'visible', 'format', 'limit', 'showReleases'])) {
             $orderBy = $request->query('orderBy', 'album_order');
             $order = $request->query('order', 'asc');
-            $visible = $request->query('visible', 1);
+            $visible = $request->query('visible');
             $format = $request->query('format');
+            $limit = $request->query('limit');
+            $showReleases = $request->query('showReleases', false);
 
-            $where = [
-                'album_is_visible' => $visible,
-            ];
+            if (!empty($visible)) {
+                $where['album_is_visible'] = $visible;
+            }
             if (!empty($format)) {
                 $where['album_format_id'] = $format;
             }
+            $with = ($showReleases == true) ? 'primary_release' : array();
 
-            return new AlbumCollection($album->where($where)->orderBy($orderBy, $order)->get());
+            return new AlbumCollection(Album::with($with)->where($where)->orderBy($orderBy, $order)->limit($limit)->get());
         }
 
-        return new ArtistResource(Artist::with('albums')->findOrFail($id));
+        return new AlbumCollection(Album::with('primary_release')->where($where)->get());
     } );
     Route::get('/albums/', function (Request $request) {
 
-         if ($request->hasAny(['orderBy', 'order', 'visible', 'format'])) {
+        if ($request->hasAny(['orderBy', 'order', 'visible', 'format', 'limit', 'showReleases'])) {
              $orderBy = $request->query('orderBy', 'album_order');
              $order = $request->query('order', 'asc');
              $visible = $request->query('visible', 1);
              $format = $request->query('format');
+             $limit = $request->query('limit');
+             $showReleases = $request->query('showReleases');
 
              $where = [
                  'album_is_visible' => $visible,
@@ -85,8 +91,9 @@ Route::prefix('v1')->group(function() {
              if (!empty($format)) {
                  $where['album_format_id'] = $format;
              }
+             $with = ($showReleases == true) ? 'primary_release' : array();
 
-             return new AlbumCollection(Album::where($where)->orderBy($orderBy, $order)->get());
+             return new AlbumCollection(Album::with($with)->where($where)->orderBy($orderBy, $order)->limit($limit)->get());
          }
 
         return new AlbumCollection(Album::all());
